@@ -45,11 +45,11 @@ public class PlayerControl : MonoBehaviour
     private float horRot;
     private float verRot;
     private bool canJump;
-    //Vestigial/Deprecated utility for sprint,we may not use it
     private float trueAddedSpeed;
     private float trueMaxSpeed;
     private float currentForwardSpeed;
     private float currentRightSpeed;
+    //Vestigial/Deprecated utility for sprint,we may not use it
     private float currentSprintValue;
     private bool sprinting;
     private bool isDrainingSprint;
@@ -148,9 +148,19 @@ public class PlayerControl : MonoBehaviour
         }
 
         //If it is on the ground it should lose speed if the input is none
-        if (canJump && (moveDir == Vector2.zero) && speedDivider != 0)
+        if (canJump && speedDivider != 0)
         {
-            rb.linearVelocity = new Vector3 (rb.linearVelocity.x/speedDivider, rb.linearVelocity.y, rb.linearVelocity.z/ speedDivider);
+            float newFValue = currentForwardSpeed;
+            float newRValue = currentRightSpeed;
+            if(moveDir.y == 0)
+            {
+                newFValue = currentForwardSpeed / speedDivider;
+            }
+            if(moveDir.x == 0)
+            {
+                newRValue = currentRightSpeed / speedDivider;
+            }
+            rb.linearVelocity = transform.forward * newFValue + transform.right * newRValue + transform.up*rb.linearVelocity.y;
         }
     }
 
@@ -178,7 +188,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (!canJump)
             {
-                //rb.AddForce(rb);
+                rb.linearVelocity = (transform.forward * currentForwardSpeed + transform.right * currentRightSpeed + transform.up* rb.linearVelocity.y);
             }
             canJump = true;
         } else
