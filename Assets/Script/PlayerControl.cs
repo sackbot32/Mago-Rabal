@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
-    //Component in mage
+    //Components
+    [Header("Components")]
     [SerializeField]
     private InputActionReference moveInput;
     [SerializeField]
@@ -21,13 +22,20 @@ public class PlayerControl : MonoBehaviour
     private LayerMask layer;
     private Transform feet;
     //Settings
-    public float speed;
+    [Header("Movement Settings")]
+    public float addedSpeed;
+    public float maxSpeed;
     public float runMultiplier;
+    [Tooltip("when stopped on the ground, by what does the speed get divided by")]
+    public float speedDivider;
+    [Header("Jump Settings")]
     public float jumpForce;
+    public float detectLength;
+    [Header("Cam Settings")]
     public float vSensitivy;
     public float hSensitivity;
     public float camLimit;
-    public float detectLength;
+    [Header("Sprint Settings")]
     public float maxSprintValue;
     public float sprintDrainingAmmount;
     public float sprintDrainingRate;
@@ -37,7 +45,11 @@ public class PlayerControl : MonoBehaviour
     private float horRot;
     private float verRot;
     private bool canJump;
-    private float trueSpeed;
+    //Vestigial/Deprecated utility for sprint,we may not use it
+    private float trueAddedSpeed;
+    private float trueMaxSpeed;
+    private float currentForwardSpeed;
+    private float currentRightSpeed;
     private float currentSprintValue;
     private bool sprinting;
     private bool isDrainingSprint;
@@ -60,6 +72,11 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug teleport
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = new Vector3(0,1,0);
+        }
         moveDir = moveInput.action.ReadValue<Vector2>().normalized;
         lookDir = lookInput.action.ReadValue<Vector2>();
         DetectGround();
@@ -83,13 +100,63 @@ public class PlayerControl : MonoBehaviour
 
     private void Move()
     {
-        trueSpeed = sprinting ? speed * runMultiplier: speed;
-        rb.linearVelocity = (transform.forward * moveDir.y + transform.right*moveDir.x)*trueSpeed + transform.up*rb.linearVelocity.y;
+        trueAddedSpeed = sprinting ? addedSpeed * runMultiplier: addedSpeed;
+        trueAddedSpeed = trueAddedSpeed * rb.mass;
+        trueMaxSpeed = sprinting ? maxSpeed * runMultiplier: maxSpeed;
+        currentForwardSpeed = Vector3.Dot(transform.forward, rb.linearVelocity);
+        currentRightSpeed = Vector3.Dot(transform.right, rb.linearVelocity);
+
+        //A little bit of a trick to make the movement "snapier" will be to allow for sudden changes of direction
+        //Forward
+        if (currentForwardSpeed > 1 && moveDir.y < 0)
+        {
+            print("Snap forward negative");
+            rb.AddForce(transform.forward * -trueAddedSpeed * trueMaxSpeed / 4);
+        }
+        if (currentForwardSpeed < -1 && moveDir.y > 0)
+        {
+            print("Snap forward pos");
+            rb.AddForce(transform.forward * trueAddedSpeed * trueMaxSpeed / 4);
+        }
+        //Right
+        if (currentRightSpeed > 1 && moveDir.x < 0)
+        {
+            print("Snap right negative");
+            rb.AddForce(transform.right * -trueAddedSpeed * trueMaxSpeed / 4);
+        }
+        if (currentRightSpeed < -1 && moveDir.x > 0)
+        {
+            print("Snap right pos");
+            rb.AddForce(transform.right * trueAddedSpeed * trueMaxSpeed / 4);
+        }
+
+        //We check that the speed doesn't go over the maxSpeed
+        if (Mathf.Abs( currentForwardSpeed) < trueMaxSpeed)
+        {
+            rb.AddForce(transform.forward * moveDir.normalized.y * trueAddedSpeed);
+        } else
+        {
+            print("Max forward speed achieved");
+        }
+        if (Mathf.Abs(currentRightSpeed) < trueMaxSpeed)
+        {
+            rb.AddForce(transform.right * moveDir.normalized.x * trueAddedSpeed);
+        }
+        else
+        {
+            print("Max right speed achieved");
+        }
+
+        //If it is on the ground it should lose speed if the input is none
+        if (canJump && (moveDir == Vector2.zero) && speedDivider != 0)
+        {
+            rb.linearVelocity = new Vector3 (rb.linearVelocity.x/speedDivider, rb.linearVelocity.y, rb.linearVelocity.z/ speedDivider);
+        }
     }
 
     private void Jump()
     {
-        rb.AddForce(transform.up * jumpForce);
+        rb.AddForce(transform.up * jumpForce * rb.mass);
         
     }
 
@@ -109,6 +176,10 @@ public class PlayerControl : MonoBehaviour
         Debug.DrawRay(feet.position, Vector3.down * detectLength,Color.red);
         if (Physics.Raycast(feet.position,Vector3.down,detectLength,layer))
         {
+            if (!canJump)
+            {
+                //rb.AddForce(rb);
+            }
             canJump = true;
         } else
         {
