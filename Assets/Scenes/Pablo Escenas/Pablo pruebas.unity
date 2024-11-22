@@ -964,7 +964,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556350051}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1035,14 +1035,16 @@ MonoBehaviour:
   sprintInput: {fileID: -7471211009204490832, guid: 2dd9c78e2b3faf84d88fe384166a1d62,
     type: 3}
   sprintBar: {fileID: 705691338}
-  addedSpeed: 15
+  addedSpeed: 30
   maxSpeed: 15
   runMultiplier: 1
   speedDivider: 1.1
-  jumpForce: 1200
+  jumpSpeedDivider: 3
+  jumpForce: 600
   detectLength: 0.25
-  vSensitivy: 0.5
-  hSensitivity: 0.5
+  addedGravity: 9
+  vSensitivy: 0.1
+  hSensitivity: 0.1
   camLimit: 90
   maxSprintValue: 25
   sprintDrainingAmmount: 1

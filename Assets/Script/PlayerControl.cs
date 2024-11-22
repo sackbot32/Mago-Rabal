@@ -28,9 +28,13 @@ public class PlayerControl : MonoBehaviour
     public float runMultiplier;
     [Tooltip("when stopped on the ground, by what does the speed get divided by")]
     public float speedDivider;
+    [Tooltip("when the air the added speed will be divided by this")]
+    public float jumpSpeedDivider;
     [Header("Jump Settings")]
     public float jumpForce;
     public float detectLength;
+    [Tooltip("when the air this will force will be also added downwards")]
+    public float addedGravity;
     [Header("Cam Settings")]
     public float vSensitivy;
     public float hSensitivity;
@@ -103,6 +107,12 @@ public class PlayerControl : MonoBehaviour
         trueAddedSpeed = sprinting ? addedSpeed * runMultiplier: addedSpeed;
         trueAddedSpeed = trueAddedSpeed * rb.mass;
         trueMaxSpeed = sprinting ? maxSpeed * runMultiplier: maxSpeed;
+        if (!canJump)
+        {
+            rb.AddForce(-transform.up * addedGravity);
+            trueAddedSpeed /= jumpSpeedDivider;
+            trueMaxSpeed /= jumpSpeedDivider;
+        }
         currentForwardSpeed = Vector3.Dot(transform.forward, rb.linearVelocity);
         currentRightSpeed = Vector3.Dot(transform.right, rb.linearVelocity);
 
