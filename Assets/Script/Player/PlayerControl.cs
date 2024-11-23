@@ -120,23 +120,23 @@ public class PlayerControl : MonoBehaviour
         //Forward
         if (currentForwardSpeed > 1 && moveDir.y < 0)
         {
-            print("Snap forward negative");
+            //print("Snap forward negative");
             rb.AddForce(transform.forward * -trueAddedSpeed * trueMaxSpeed / 4);
         }
         if (currentForwardSpeed < -1 && moveDir.y > 0)
         {
-            print("Snap forward pos");
+            //print("Snap forward pos");
             rb.AddForce(transform.forward * trueAddedSpeed * trueMaxSpeed / 4);
         }
         //Right
         if (currentRightSpeed > 1 && moveDir.x < 0)
         {
-            print("Snap right negative");
+            //print("Snap right negative");
             rb.AddForce(transform.right * -trueAddedSpeed * trueMaxSpeed / 4);
         }
         if (currentRightSpeed < -1 && moveDir.x > 0)
         {
-            print("Snap right pos");
+            //print("Snap right pos");
             rb.AddForce(transform.right * trueAddedSpeed * trueMaxSpeed / 4);
         }
 
@@ -146,7 +146,7 @@ public class PlayerControl : MonoBehaviour
             rb.AddForce(transform.forward * moveDir.normalized.y * trueAddedSpeed);
         } else
         {
-            print("Max forward speed achieved");
+            //print("Max forward speed achieved");
         }
         if (Mathf.Abs(currentRightSpeed) < trueMaxSpeed)
         {
@@ -154,7 +154,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            print("Max right speed achieved");
+            //print("Max right speed achieved");
         }
 
         //If it is on the ground it should lose speed if the input is none
@@ -230,7 +230,7 @@ public class PlayerControl : MonoBehaviour
     private IEnumerator NormalSprintRegen()
     {
         isDrainingSprint = false;
-        print("Con estamina");
+        //print("Con estamina");
         while (!sprinting && (currentSprintValue < maxSprintValue))
         {
             currentSprintValue += sprintDrainingAmmount;
@@ -246,7 +246,7 @@ public class PlayerControl : MonoBehaviour
     private IEnumerator EmptySprintRegen()
     {
         canSprint = false;
-        print("Sin estamina");
+        //print("Sin estamina");
         while ((currentSprintValue < maxSprintValue))
         {
             currentSprintValue += sprintDrainingAmmount/2;
