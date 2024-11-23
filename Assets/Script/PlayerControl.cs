@@ -196,6 +196,7 @@ public class PlayerControl : MonoBehaviour
         Debug.DrawRay(feet.position, Vector3.down * detectLength,Color.red);
         if (Physics.Raycast(feet.position,Vector3.down,detectLength,layer))
         {
+            //This is done to avoid losing speed when hitting the ground
             if (!canJump)
             {
                 rb.linearVelocity = (transform.forward * currentForwardSpeed + transform.right * currentRightSpeed + transform.up* rb.linearVelocity.y);
