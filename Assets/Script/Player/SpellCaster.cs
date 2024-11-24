@@ -17,8 +17,9 @@ public class SpellCaster : MonoBehaviour
     private Transform castSourcePoint;
     //These will be filled by a serializedobject later
     [Header("Spell Settings")]
-    public GameObject spellProyectile;
     public BaseSpellObject spellObject;
+    public GameObject spellProyectile;
+    public string spellProyectileName;
     public float proyectileSpeed;
     public float rate;
     public Action<GameObject, List<SpellAtribute>> hitAction;
@@ -65,6 +66,7 @@ public class SpellCaster : MonoBehaviour
     {
         //Functional
         spellProyectile = newSpellObject.spellProyectile;
+        spellProyectileName = newSpellObject.spellProyectileName;
         proyectileSpeed = newSpellObject.proyectileSpeed;
         rate = newSpellObject.rate;
         newSpellObject.timeSinceLastCast = rate;
@@ -93,7 +95,7 @@ public class SpellCaster : MonoBehaviour
         //}
         GameObject newProyectile = Instantiate(spellProyectile, castSourcePoint.position, castSourcePoint.rotation);
         newProyectile.GetComponent<Rigidbody>().linearVelocity = shootDir.normalized * proyectileSpeed;
-        newProyectile.GetComponent<SpellProyectile>().SetProyectileSettings(hitAction,currentAtributes, tagProyectileDetects,proyectileHitParticle);
+        newProyectile.GetComponent<SpellProyectile>().SetProyectileSettings(hitAction,currentAtributes, tagProyectileDetects,spellProyectileName,proyectileHitParticle);
     }
 
 

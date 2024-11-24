@@ -14,6 +14,9 @@ public class SpellProyectile : MonoBehaviour
     public string[] tagsToCheck;
     [Tooltip("List of string of tags that it should just destroy agaisnt")]
     public string[] generalTagsToDeactivate;
+    //Data
+        //This will be used to choose the proyectile when using object pools
+    public string proyectileName;
 
     private void Start()
     {
@@ -21,8 +24,10 @@ public class SpellProyectile : MonoBehaviour
     }
 
     //Will be extended as needed
-    public void SetProyectileSettings(Action<GameObject, List<SpellAtribute>> newOnHit, List<SpellAtribute> newAtributes, string[] newTags, GameObject newHitParticle)
+    public void SetProyectileSettings(Action<GameObject, List<SpellAtribute>> newOnHit, List<SpellAtribute> newAtributes, string[] newTags,string newProyectileName ,
+        GameObject newHitParticle)
     {
+        proyectileName = newProyectileName;
         if(newHitParticle != null)
         {
             hitParticle = newHitParticle;

@@ -8,6 +8,7 @@ public class BaseSpellObject : ScriptableObject
     //Settings
     [Header("Funtional")]
     public GameObject spellProyectile;
+    public string spellProyectileName;
     public float proyectileSpeed;
     public float rate;
     public string[] tagProyectileDetects;
