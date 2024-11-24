@@ -6,10 +6,9 @@ public class Fireball : SpellBase
 {
     private float damage;
     private float explosiveDamage;
-
+    public GameObject explosionPrefab;
     private string damageKey = "Damage";
     private string expDamageKey = "ExplosionDamage";
-    private string timeKey = "TimeBetween";
 
     public void Hit(GameObject hitObj, List<SpellAtribute> atributes)
     {
@@ -27,20 +26,7 @@ public class Fireball : SpellBase
     }
     public void Detonate(List<SpellAtribute> atributes)
     {
-        float time = 0;
-        float trueExplosionDamage = explosiveDamage;
-        foreach (SpellAtribute atribute in atributes)
-        {
-            if (atribute.name == timeKey)
-            {
-                time = atribute.value;
-            }
-            if(atribute.name == expDamageKey)
-            {
-                trueExplosionDamage = atribute.value;
-            }
-        }
-        FireballDetTarget.instance.ExplodeAllFireBalls(time,trueExplosionDamage);
+        SpellDetonations.instance.spellDetonatedDict[SpellType.FireBall] = true;
     }
 
     public void SelfCast(GameObject player, List<SpellAtribute> atributes)
@@ -57,6 +43,41 @@ public class Fireball : SpellBase
         Debug.Log("Objective hit: " + player.name + " damage dealth: " + trueDamage);
     }
 
+    public void ApplyToProyectile(GameObject proyectile, List<SpellAtribute> atributes)
+    {
+        SpellDetonations.instance.spellDetonatedDict[SpellType.FireBall] = false;
+        float trueExplosionDamage = explosiveDamage;
+        foreach (SpellAtribute atribute in atributes)
+        {
 
-    
+            if (atribute.name == expDamageKey)
+            {
+                trueExplosionDamage = atribute.value;
+                break;
+            }
+        }
+        SpellEffects effectTarget = proyectile.GetComponent<SpellEffects>();
+        if (effectTarget != null)
+        {
+            effectTarget.StartRecievedCoroutine(ExplosionByDet(proyectile,trueExplosionDamage));
+        }
+
+    }
+
+    IEnumerator ExplosionByDet(GameObject proyectile, float explosionDamage)
+    {
+        while (!SpellDetonations.instance.spellDetonatedDict[SpellType.FireBall])
+        {
+            yield return null;
+        }
+        if(explosionPrefab != null)
+        {
+            //Need to add proper explosion
+            GameObject newExplo = GameObject.Instantiate(explosionPrefab,proyectile.transform.position,Quaternion.identity);
+
+        }
+        GameObject.Destroy(proyectile);
+    }
+
+
 }

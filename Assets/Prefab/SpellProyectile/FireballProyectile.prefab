@@ -4845,7 +4845,7 @@ GameObject:
   - component: {fileID: 250369291266217917}
   - component: {fileID: 1156738041953074884}
   - component: {fileID: 1159278275696497651}
-  - component: {fileID: -4574437807230629668}
+  - component: {fileID: -2591542500746675030}
   m_Layer: 0
   m_Name: FireballProyectile
   m_TagString: Untagged
@@ -4936,7 +4936,7 @@ MonoBehaviour:
   generalTagsToDeactivate:
   - Floor
   proyectileName: 
---- !u!114 &-4574437807230629668
+--- !u!114 &-2591542500746675030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4945,10 +4945,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5755890348237091507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6e37c3f983798e45953d012e08a500f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cff92af1f8ce6f47babb9f1a8b88ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionDamage: 0
 --- !u!1 &7367496208765593049
 GameObject:
   m_ObjectHideFlags: 0

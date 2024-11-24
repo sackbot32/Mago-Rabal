@@ -11,4 +11,5 @@ public interface SpellBase
     public void Detonate(List<SpellAtribute> atributes);
 
     public void SelfCast(GameObject player, List<SpellAtribute> atributes);
+    public void ApplyToProyectile(GameObject proyectile, List<SpellAtribute> atributes);
 }

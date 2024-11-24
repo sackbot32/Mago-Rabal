@@ -24,6 +24,7 @@ public class SpellCaster : MonoBehaviour
     public float rate;
     [Tooltip("If true while pushing the spell button it will do the spell as soon as possible")]
     public bool isAutomatic;
+    public Action<GameObject, List<SpellAtribute>> onProyectileAction;
     public Action<GameObject, List<SpellAtribute>> hitAction;
     public string[] tagProyectileDetects;
     public Action<GameObject, List<SpellAtribute>> castAtSelfAction;
@@ -107,6 +108,7 @@ public class SpellCaster : MonoBehaviour
         isAutomatic = newSpellObject.isAutomatic;
         tagProyectileDetects = newSpellObject.tagProyectileDetects;
         currentAtributes = newSpellObject.atributes;
+        onProyectileAction = SpellManager.ReturnSpell(newSpellObject.spellType).ApplyToProyectile;
         hitAction = SpellManager.ReturnSpell(newSpellObject.spellType).Hit;
         castAtSelfAction = SpellManager.ReturnSpell(newSpellObject.spellType).SelfCast;
         detonateAction = SpellManager.ReturnSpell(newSpellObject.spellType).Detonate;
@@ -129,6 +131,7 @@ public class SpellCaster : MonoBehaviour
         //    targetPoint = ray.GetPoint(5);
         //}
         GameObject newProyectile = Instantiate(spellProyectile, castSourcePoint.position, castSourcePoint.rotation);
+        onProyectileAction.Invoke(newProyectile, currentAtributes);
         newProyectile.GetComponent<Rigidbody>().linearVelocity = shootDir.normalized * proyectileSpeed;
         newProyectile.GetComponent<SpellProyectile>().SetProyectileSettings(hitAction,currentAtributes, tagProyectileDetects,spellProyectileName,proyectileHitParticle);
     }

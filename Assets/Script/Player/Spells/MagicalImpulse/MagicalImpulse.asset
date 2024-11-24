@@ -28,6 +28,8 @@ MonoBehaviour:
     value: 3000
   - name: PlayerPushMult
     value: 2
+  - name: TimeTillPush
+    value: 6
   castParticle: {fileID: 0}
   proyectileHitParticle: {fileID: 0}
-  timeSinceLastCast: 1.6738061
+  timeSinceLastCast: 3.6010926
