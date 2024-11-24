@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MagicalImpulse : SpellBase
@@ -6,20 +7,30 @@ public class MagicalImpulse : SpellBase
     public float pushForceForEnem = 600;
     //Floor has more friction so needs extra force to do the same ammount of distance
     public float floorMultiplier = 2f;
-    public void Hit(GameObject hitObj)
+    private string enemPushAtributeKey = "EnemPush";
+    private string playerPushAtributeKey = "PlayerPush";
+    private string playerPushMultAtributeKey = "PlayerPushMult";
+    public void Hit(GameObject hitObj, List<SpellAtribute> atributes)
     {
         if(hitObj.GetComponent<MagicalImpulseEffect>() != null)
         {
-            hitObj.GetComponent<MagicalImpulseEffect>().force = pushForceForEnem;
+            float trueEnemPushForce = pushForceForEnem;
+            foreach (SpellAtribute atribute in atributes)
+            {
+                if(atribute.name == enemPushAtributeKey)
+                {
+                    trueEnemPushForce = atribute.value; 
+                    break;
+                }
+            }
+            hitObj.GetComponent<MagicalImpulseEffect>().force = trueEnemPushForce;
             hitObj.GetComponent<MagicalImpulseEffect>().enabled = true;
-            Debug.Log("Enemy hit, impulse activated");
         } 
     }
-    public void Detonate()
+    public void Detonate(List<SpellAtribute> atributes)
     {
         //Find a way to do this better
         MagicalImpulseEffect[] enemies = MagicalImpulseDetTarget.instance.ReturnList();
-        Debug.Log("Impulse detonated");
         foreach (MagicalImpulseEffect enemy in enemies)
         {
             if (enemy.enabled)
@@ -30,12 +41,28 @@ public class MagicalImpulse : SpellBase
     }
 
 
-    public void SelfCast(GameObject player)
+    public void SelfCast(GameObject player, List<SpellAtribute> atributes)
     {
-        Debug.Log("Impulse self, source point: " + player.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).gameObject);
+        float truePlayerPush = pushForceForPlayer;
+        float truePlayerPushMult = floorMultiplier;
+        foreach (SpellAtribute atribute in atributes)
+        {
+            if(atribute.name == playerPushAtributeKey)
+            {
+                truePlayerPush = atribute.value;
+            }
+            if(atribute.name == playerPushMultAtributeKey)
+            {
+                truePlayerPushMult = atribute.value;
+            }
+            if((truePlayerPushMult != floorMultiplier) && (truePlayerPush != pushForceForPlayer))
+            {
+                break;
+            }
+        }
         Vector3 dir = player.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform.forward;
         dir = new Vector3(dir.x, 0, dir.z);
-        float truePushForce = player.GetComponent<PlayerControl>().DetectGround() ? pushForceForPlayer * floorMultiplier : pushForceForPlayer;
+        float truePushForce = player.GetComponent<PlayerControl>().DetectGround() ? truePlayerPush * truePlayerPushMult : truePlayerPush;
 
         player.GetComponent<Rigidbody>().AddForce(dir.normalized * truePushForce);
     }

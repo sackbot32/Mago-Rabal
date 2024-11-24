@@ -664,7 +664,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 0
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -4846,7 +4846,7 @@ GameObject:
   - component: {fileID: 1156738041953074884}
   - component: {fileID: 1159278275696497651}
   m_Layer: 0
-  m_Name: BasicProyectile
+  m_Name: BasicProyectalieV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4929,9 +4929,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e627b1c9a05a714ba8b53eb7a982498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  childMesh: {fileID: 8606233754613162841}
-  anim: {fileID: 1182578643460579321}
-  particle: {fileID: 5859959231097703254}
   timeTillDisable: 5
   currentAtributes: []
   tagsToCheck: []

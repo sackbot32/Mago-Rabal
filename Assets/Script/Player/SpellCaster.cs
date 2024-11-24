@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,29 +16,26 @@ public class SpellCaster : MonoBehaviour
     [SerializeField]
     private Transform castSourcePoint;
     //These will be filled by a serializedobject later
+    [Header("Spell Settings")]
     public GameObject spellProyectile;
-    [Header("Settings")]
     public BaseSpellObject spellObject;
-    public Mesh spellProyectileMesh;
     public float proyectileSpeed;
     public float rate;
-    public Action<GameObject> hitAction;
+    public Action<GameObject, List<SpellAtribute>> hitAction;
     public string[] tagProyectileDetects;
-    public Action<GameObject> castAtSelfAction;
-    public Action detonateAction;
+    public Action<GameObject, List<SpellAtribute>> castAtSelfAction;
+    public Action<List<SpellAtribute>> detonateAction;
+    public List<SpellAtribute> currentAtributes;
+    [Header("Visual spell settings")]
+    public GameObject castParticle;
+    public GameObject proyectileHitParticle;
+
     //Data
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        spellProyectileMesh = spellObject.spellProyectileMesh;
-        proyectileSpeed = spellObject.proyectileSpeed;
-        rate = spellObject.rate;
-        spellObject.timeSinceLastCast = rate;
-        tagProyectileDetects = spellObject.tagProyectileDetects;
-        hitAction = SpellManager.ReturnSpell(spellObject.spellType).Hit;
-        castAtSelfAction = SpellManager.ReturnSpell(spellObject.spellType).SelfCast;
-        detonateAction = SpellManager.ReturnSpell(spellObject.spellType).Detonate;
+        ChangeSpell(spellObject);
     }
 
 
@@ -53,14 +51,28 @@ public class SpellCaster : MonoBehaviour
         if (detonateInput.action.WasPressedThisFrame())
         {
             //TODO detonate animation and particles
-            detonateAction.Invoke();
+            detonateAction.Invoke(currentAtributes);
         }
         if (castAtSelfInput.action.WasPressedThisFrame() && spellObject.timeSinceLastCast >= rate)
         {
             spellObject.timeSinceLastCast = 0;
             //TODO cast at self animation and particles
-            castAtSelfAction.Invoke(gameObject);
+            castAtSelfAction.Invoke(gameObject,currentAtributes);
         }
+    }
+
+    private void ChangeSpell(BaseSpellObject newSpellObject)
+    {
+        //Functional
+        spellProyectile = newSpellObject.spellProyectile;
+        proyectileSpeed = newSpellObject.proyectileSpeed;
+        rate = newSpellObject.rate;
+        newSpellObject.timeSinceLastCast = rate;
+        tagProyectileDetects = newSpellObject.tagProyectileDetects;
+        currentAtributes = newSpellObject.atributes;
+        hitAction = SpellManager.ReturnSpell(newSpellObject.spellType).Hit;
+        castAtSelfAction = SpellManager.ReturnSpell(newSpellObject.spellType).SelfCast;
+        detonateAction = SpellManager.ReturnSpell(newSpellObject.spellType).Detonate;
     }
 
     private void CastProyectile()
@@ -81,7 +93,7 @@ public class SpellCaster : MonoBehaviour
         //}
         GameObject newProyectile = Instantiate(spellProyectile, castSourcePoint.position, castSourcePoint.rotation);
         newProyectile.GetComponent<Rigidbody>().linearVelocity = shootDir.normalized * proyectileSpeed;
-        newProyectile.GetComponent<SpellProyectile>().SetProyectileSettings(hitAction, tagProyectileDetects,spellProyectileMesh);
+        newProyectile.GetComponent<SpellProyectile>().SetProyectileSettings(hitAction,currentAtributes, tagProyectileDetects,proyectileHitParticle);
     }
 
 

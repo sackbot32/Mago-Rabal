@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpellProyectile : MonoBehaviour
 {
     //Components
+    private GameObject hitParticle;
     //Settings
     public float timeTillDisable;
-    public Action<GameObject> onHitAction;
+    public Action<GameObject, List<SpellAtribute>> onHitAction;
+    public List<SpellAtribute> currentAtributes;
     public string[] tagsToCheck;
     [Tooltip("List of string of tags that it should just destroy agaisnt")]
     public string[] generalTagsToDeactivate;
@@ -18,12 +21,13 @@ public class SpellProyectile : MonoBehaviour
     }
 
     //Will be extended as needed
-    public void SetProyectileSettings(Action<GameObject> newOnHit, string[] newTags, Mesh newMesh)
+    public void SetProyectileSettings(Action<GameObject, List<SpellAtribute>> newOnHit, List<SpellAtribute> newAtributes, string[] newTags, GameObject newHitParticle)
     {
-        if(GetComponentInChildren<MeshFilter>() != null && newMesh != null)
+        if(newHitParticle != null)
         {
-            GetComponentInChildren<MeshFilter>().mesh = newMesh;
+            hitParticle = newHitParticle;
         }
+        currentAtributes = newAtributes;
         onHitAction = newOnHit;
         tagsToCheck = newTags;
     }
@@ -50,12 +54,20 @@ public class SpellProyectile : MonoBehaviour
 
         if (hasActionInvokeTag)
         {
-            onHitAction.Invoke(other.gameObject); 
+            onHitAction.Invoke(other.gameObject,currentAtributes);
+            if(hitParticle != null)
+            {
+                Instantiate(hitParticle);
+            }
             Destroy(gameObject);
         }
 
         if (hasDeactivationTag && !hasActionInvokeTag)
         {
+            if (hitParticle != null)
+            {
+                Instantiate(hitParticle);
+            }
             Destroy(gameObject);
         }
     }

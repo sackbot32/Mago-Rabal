@@ -80,6 +80,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             transform.position = new Vector3(0,1,0);
+            rb.linearVelocity = new Vector3(0,0,0);
         }
         moveDir = moveInput.action.ReadValue<Vector2>().normalized;
         lookDir = lookInput.action.ReadValue<Vector2>();

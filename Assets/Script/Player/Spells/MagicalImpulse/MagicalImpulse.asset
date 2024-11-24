@@ -12,10 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb3c0fadefac67844bbc5ea827d768c8, type: 3}
   m_Name: MagicalImpulse
   m_EditorClassIdentifier: 
-  spellProyectileMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   proyectileSpeed: 10
   rate: 0
   tagProyectileDetects:
   - Enemy
   spellType: 3
-  timeSinceLastCast: 5.936727
+  atributes:
+  - name: EnemPush
+    value: 500
+  - name: PlayerPush
+    value: 3000
+  - name: PlayerPushMult
+    value: 2
+  spellProyectile: {fileID: 5755890348237091507, guid: 4b912f27b3c40684ea9eab8051a3364b,
+    type: 3}
+  castParticle: {fileID: 0}
+  proyectileHitParticle: {fileID: 0}
+  timeSinceLastCast: 9.911471
