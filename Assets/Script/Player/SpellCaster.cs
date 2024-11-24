@@ -22,6 +22,8 @@ public class SpellCaster : MonoBehaviour
     public string spellProyectileName;
     public float proyectileSpeed;
     public float rate;
+    [Tooltip("If true while pushing the spell button it will do the spell as soon as possible")]
+    public bool isAutomatic;
     public Action<GameObject, List<SpellAtribute>> hitAction;
     public string[] tagProyectileDetects;
     public Action<GameObject, List<SpellAtribute>> castAtSelfAction;
@@ -32,8 +34,8 @@ public class SpellCaster : MonoBehaviour
     public GameObject proyectileHitParticle;
 
     //Data
+    
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ChangeSpell(spellObject);
@@ -43,7 +45,19 @@ public class SpellCaster : MonoBehaviour
     void Update()
     {
         spellObject.timeSinceLastCast += Time.deltaTime;
-        if(castLaunchInput.action.WasPressedThisFrame() && spellObject.timeSinceLastCast >= rate)
+        if (isAutomatic)
+        {
+            AutomaticCasting();
+        } else
+        {
+            SemiAutomaticCasting();
+        }
+        
+    }
+
+    private void SemiAutomaticCasting()
+    {
+        if (castLaunchInput.action.WasPressedThisFrame() && spellObject.timeSinceLastCast >= rate)
         {
             //TODO cast launch animation and particles
             spellObject.timeSinceLastCast = 0;
@@ -58,7 +72,28 @@ public class SpellCaster : MonoBehaviour
         {
             spellObject.timeSinceLastCast = 0;
             //TODO cast at self animation and particles
-            castAtSelfAction.Invoke(gameObject,currentAtributes);
+            castAtSelfAction.Invoke(gameObject, currentAtributes);
+        }
+    }
+
+    private void AutomaticCasting()
+    {
+        if (castLaunchInput.action.IsPressed() && spellObject.timeSinceLastCast >= rate)
+        {
+            //TODO cast launch animation and particles
+            spellObject.timeSinceLastCast = 0;
+            CastProyectile();
+        }
+        if (detonateInput.action.WasPressedThisFrame())
+        {
+            //TODO detonate animation and particles
+            detonateAction.Invoke(currentAtributes);
+        }
+        if (castAtSelfInput.action.IsPressed() && spellObject.timeSinceLastCast >= rate)
+        {
+            spellObject.timeSinceLastCast = 0;
+            //TODO cast at self animation and particles
+            castAtSelfAction.Invoke(gameObject, currentAtributes);
         }
     }
 
@@ -69,6 +104,7 @@ public class SpellCaster : MonoBehaviour
         spellProyectileName = newSpellObject.spellProyectileName;
         proyectileSpeed = newSpellObject.proyectileSpeed;
         rate = newSpellObject.rate;
+        isAutomatic = newSpellObject.isAutomatic;
         newSpellObject.timeSinceLastCast = rate;
         tagProyectileDetects = newSpellObject.tagProyectileDetects;
         currentAtributes = newSpellObject.atributes;

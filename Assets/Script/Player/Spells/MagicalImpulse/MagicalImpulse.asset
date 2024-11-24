@@ -16,7 +16,8 @@ MonoBehaviour:
     type: 3}
   spellProyectileName: Impulse
   proyectileSpeed: 10
-  rate: 0
+  rate: 0.5
+  isAutomatic: 1
   tagProyectileDetects:
   - Enemy
   spellType: 3
@@ -29,4 +30,4 @@ MonoBehaviour:
     value: 2
   castParticle: {fileID: 0}
   proyectileHitParticle: {fileID: 0}
-  timeSinceLastCast: 9.911471
+  timeSinceLastCast: 1.6738061

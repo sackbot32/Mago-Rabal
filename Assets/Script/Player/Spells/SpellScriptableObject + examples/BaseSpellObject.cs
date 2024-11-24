@@ -11,6 +11,7 @@ public class BaseSpellObject : ScriptableObject
     public string spellProyectileName;
     public float proyectileSpeed;
     public float rate;
+    public bool isAutomatic;
     public string[] tagProyectileDetects;
     public SpellType spellType;
     [SerializeField]
