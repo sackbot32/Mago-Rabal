@@ -191,7 +191,7 @@ public class PlayerControl : MonoBehaviour
         cam.localRotation = Quaternion.Euler(verRot, 0f, 0f);
     }
 
-    private void DetectGround()
+    public bool DetectGround()
     {
         Debug.DrawRay(feet.position, Vector3.down * detectLength,Color.red);
         if (Physics.Raycast(feet.position,Vector3.down,detectLength,layer))
@@ -206,6 +206,7 @@ public class PlayerControl : MonoBehaviour
         {
             canJump = false;
         }
+        return canJump;
     }
 
     private IEnumerator DrainWhileSprinting()

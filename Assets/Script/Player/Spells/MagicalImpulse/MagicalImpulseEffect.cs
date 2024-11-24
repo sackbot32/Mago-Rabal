@@ -18,17 +18,23 @@ public class MagicalImpulseEffect : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         selfImpulseEffect = this;
+        MagicalImpulseDetTarget.instance.Remove(selfImpulseEffect);
         selfImpulseEffect.enabled = false;
-        if(coroutine != null)
+        if (coroutine != null)
         {
             StopCoroutine(coroutine);
             coroutine = null;
+
         }
         
     }
 
     private void OnEnable()
     {
+        if(MagicalImpulseDetTarget.instance != null)
+        {
+            MagicalImpulseDetTarget.instance.Add(selfImpulseEffect);
+        }
         coroutine = StartCoroutine(PushCountDown());
     }
 
@@ -39,6 +45,7 @@ public class MagicalImpulseEffect : MonoBehaviour
             StopCoroutine(coroutine);
             coroutine = null;
         }
+        MagicalImpulseDetTarget.instance.Remove(selfImpulseEffect);
     }
 
 
@@ -52,8 +59,20 @@ public class MagicalImpulseEffect : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        //TODO Get where the player is looking
-        rb.AddForce(transform.up * force);
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        //RaycastHit hit;
+        Vector3 targetPoint;
+        targetPoint = ray.GetPoint(5);
+        Vector3 impulseDir = targetPoint - transform.position;
+        //if (Physics.Raycast(ray, out hit))
+        //{
+        //    targetPoint = hit.point;
+        //}
+        //else
+        //{
+        //    targetPoint = ray.GetPoint(5);
+        //}
+        rb.AddForce(impulseDir.normalized * force);
         detonated = false;
         selfImpulseEffect.enabled = false;
     }

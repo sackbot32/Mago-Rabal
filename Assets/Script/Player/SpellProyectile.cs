@@ -14,7 +14,7 @@ public class SpellProyectile : MonoBehaviour
 
     private void Start()
     {
-
+        StartCoroutine(DisableAfterTime());
     }
 
     //Will be extended as needed

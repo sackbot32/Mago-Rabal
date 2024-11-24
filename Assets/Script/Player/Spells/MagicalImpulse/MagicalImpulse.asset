@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellProyectileMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   proyectileSpeed: 10
-  rate: 1
+  rate: 0
   tagProyectileDetects:
   - Enemy
   spellType: 3
-  timeSinceLastCast: 3.159798
+  timeSinceLastCast: 5.936727

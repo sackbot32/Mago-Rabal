@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -65,8 +66,21 @@ public class SpellCaster : MonoBehaviour
     private void CastProyectile()
     {
         //TODO create pool for proyectiles
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        //RaycastHit hit;
+        Vector3 targetPoint;
+        targetPoint = ray.GetPoint(5);
+        Vector3 shootDir = targetPoint - castSourcePoint.position;
+        //if (Physics.Raycast(ray, out hit))
+        //{
+        //    targetPoint = hit.point;
+        //}
+        //else
+        //{
+        //    targetPoint = ray.GetPoint(5);
+        //}
         GameObject newProyectile = Instantiate(spellProyectile, castSourcePoint.position, castSourcePoint.rotation);
-        newProyectile.GetComponent<Rigidbody>().linearVelocity = castSourcePoint.forward * proyectileSpeed;
+        newProyectile.GetComponent<Rigidbody>().linearVelocity = shootDir.normalized * proyectileSpeed;
         newProyectile.GetComponent<SpellProyectile>().SetProyectileSettings(hitAction, tagProyectileDetects,spellProyectileMesh);
     }
 
