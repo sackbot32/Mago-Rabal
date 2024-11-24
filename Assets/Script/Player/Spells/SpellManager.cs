@@ -26,6 +26,7 @@ public static class SpellManager
                 sentSpell = new BasicSpellTestB(); 
                 break;
             case (SpellType.FireBall):
+                sentSpell = new Fireball();
                 break; 
             case (SpellType.MagicalImpulse):
                 sentSpell = new MagicalImpulse();

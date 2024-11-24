@@ -105,7 +105,6 @@ public class SpellCaster : MonoBehaviour
         proyectileSpeed = newSpellObject.proyectileSpeed;
         rate = newSpellObject.rate;
         isAutomatic = newSpellObject.isAutomatic;
-        newSpellObject.timeSinceLastCast = rate;
         tagProyectileDetects = newSpellObject.tagProyectileDetects;
         currentAtributes = newSpellObject.atributes;
         hitAction = SpellManager.ReturnSpell(newSpellObject.spellType).Hit;

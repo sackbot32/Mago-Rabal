@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb3c0fadefac67844bbc5ea827d768c8, type: 3}
+  m_Name: Fireball
+  m_EditorClassIdentifier: 
+  spellProyectile: {fileID: 5755890348237091507, guid: c9ec31b09342dd6479f33fba55c0ed13,
+    type: 3}
+  spellProyectileName: Fire
+  proyectileSpeed: 20
+  rate: 0.1
+  isAutomatic: 1
+  tagProyectileDetects:
+  - Enemy
+  spellType: 2
+  atributes:
+  - name: Damage
+    value: 20
+  - name: ExplosionDamage
+    value: 5
+  - name: TimeBetween
+    value: 0.1
+  castParticle: {fileID: 0}
+  proyectileHitParticle: {fileID: 0}
+  timeSinceLastCast: 2.5397732
