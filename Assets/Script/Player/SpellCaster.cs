@@ -92,7 +92,7 @@ public class SpellCaster : MonoBehaviour
             //TODO detonate animation and particles
             detonateAction.Invoke(currentAtributes);
         }
-        if (castAtSelfInput.action.IsPressed() && currentSpellObject.timeSinceLastCast >= rate)
+        if (castAtSelfInput.action.WasPressedThisFrame() && currentSpellObject.timeSinceLastCast >= rate)
         {
             currentSpellObject.timeSinceLastCast = 0;
             //TODO cast at self animation and particles

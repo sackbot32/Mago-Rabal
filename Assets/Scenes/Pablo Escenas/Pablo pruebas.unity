@@ -911,6 +911,7 @@ GameObject:
   - component: {fileID: 556350055}
   - component: {fileID: 556350057}
   - component: {fileID: 556350058}
+  - component: {fileID: 556350059}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1102,6 +1103,19 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 7800b64cb545fc142832c91732ffa43d, type: 2}
   selectInput: {fileID: -944628639613478452, guid: 2dd9c78e2b3faf84d88fe384166a1d62,
     type: 3}
+--- !u!114 &556350059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556350051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9281b912f263dba42bb18a40fc847ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
 --- !u!1 &612099746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1892,6 +1906,7 @@ GameObject:
   - component: {fileID: 1964030386}
   - component: {fileID: 1964030390}
   - component: {fileID: 1964030391}
+  - component: {fileID: 1964030392}
   m_Layer: 0
   m_Name: EnemTest
   m_TagString: Enemy
@@ -2028,6 +2043,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   corroutineNames: []
+--- !u!114 &1964030392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964030385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc389aae2cb53946975ab7874236ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &2093243684
 GameObject:
   m_ObjectHideFlags: 0

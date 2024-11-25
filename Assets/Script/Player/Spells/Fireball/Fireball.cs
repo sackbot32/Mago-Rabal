@@ -23,7 +23,10 @@ public class Fireball : SpellBase
                 break;
             }
         }
-        Debug.Log("Objective hit: " + hitObj.name + " damage dealth: " + trueDamage);
+        if (hitObj.TryGetComponent(out IHealth enemyHealth))
+        {
+            enemyHealth.TakeDamage(trueDamage);
+        }
 
     }
     public void Detonate(List<SpellAtribute> atributes)
@@ -42,7 +45,10 @@ public class Fireball : SpellBase
                 break;
             }
         }
-        Debug.Log("Objective hit: " + player.name + " damage dealth: " + trueDamage);
+        if (player.TryGetComponent(out IHealth playerHealth))
+        {
+            playerHealth.TakeDamage(trueDamage);
+        }
     }
 
     public void ApplyToProyectile(GameObject proyectile, List<SpellAtribute> atributes)
