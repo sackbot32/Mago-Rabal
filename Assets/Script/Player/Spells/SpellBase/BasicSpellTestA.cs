@@ -5,21 +5,21 @@ public class BasicSpellTestA : SpellBase
 {
     public void Hit(GameObject hitObj, List<SpellAtribute> atributes)
     {
-        Debug.Log("Object hitted, name: " + hitObj);
+        Debug.Log("A Object hitted, name: " + hitObj);
     }
 
     public void Detonate(List<SpellAtribute> atributes)
     {
-        Debug.Log("Detonation");
+        Debug.Log("A Detonation");
     }
 
     public void SelfCast(GameObject player, List<SpellAtribute> atributes)
     {
-        Debug.Log("SelfCasted");
+        Debug.Log("A SelfCasted");
     }
 
     public void ApplyToProyectile(GameObject proyectile, List<SpellAtribute> atributes)
     {
-        Debug.Log("applied to " + proyectile.name);
+        Debug.Log("A applied to " + proyectile.name);
     }
 }

@@ -7,6 +7,7 @@ public class Fireball : SpellBase
     private float damage;
     private float explosiveDamage;
     public GameObject explosionPrefab;
+    public GameObject explosionParticlePrefab;
     private string damageKey = "Damage";
     private string expDamageKey = "ExplosionDamage";
 
@@ -26,7 +27,7 @@ public class Fireball : SpellBase
     }
     public void Detonate(List<SpellAtribute> atributes)
     {
-        SpellDetonations.instance.spellDetonatedDict[SpellType.FireBall] = true;
+        SpellDictionary.instance.spellDetonatedDict[SpellType.FireBall] = true;
     }
 
     public void SelfCast(GameObject player, List<SpellAtribute> atributes)
@@ -45,7 +46,7 @@ public class Fireball : SpellBase
 
     public void ApplyToProyectile(GameObject proyectile, List<SpellAtribute> atributes)
     {
-        SpellDetonations.instance.spellDetonatedDict[SpellType.FireBall] = false;
+        SpellDictionary.instance.spellDetonatedDict[SpellType.FireBall] = false;
         float trueExplosionDamage = explosiveDamage;
         foreach (SpellAtribute atribute in atributes)
         {
@@ -66,14 +67,22 @@ public class Fireball : SpellBase
 
     IEnumerator ExplosionByDet(GameObject proyectile, float explosionDamage)
     {
-        while (!SpellDetonations.instance.spellDetonatedDict[SpellType.FireBall])
+        while (!SpellDictionary.instance.spellDetonatedDict[SpellType.FireBall])
         {
             yield return null;
         }
-        if(explosionPrefab != null)
+        SpellDictionary.instance.spellGameObjectDict.TryGetValue("SpellExplosion", out explosionPrefab);
+        SpellDictionary.instance.spellGameObjectDict.TryGetValue("SpellExplosionParticle", out explosionParticlePrefab);
+        if (explosionPrefab != null)
         {
             //Need to add proper explosion
             GameObject newExplo = GameObject.Instantiate(explosionPrefab,proyectile.transform.position,Quaternion.identity);
+            string[] list = new string[1];
+            list[0] = "Enemy";
+            List<SpellAtribute> atributeForExplosion = new List<SpellAtribute>();
+            atributeForExplosion.Add(new SpellAtribute(damageKey,explosionDamage));
+            newExplo.GetComponent<SpellExplosion>().SetExplosionSettings(Hit,atributeForExplosion,list,explosionParticlePrefab);
+            newExplo.GetComponent<SpellExplosion>().ExplodeParticle();
 
         }
         GameObject.Destroy(proyectile);

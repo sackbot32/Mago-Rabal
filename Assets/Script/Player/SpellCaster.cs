@@ -15,9 +15,10 @@ public class SpellCaster : MonoBehaviour
     private InputActionReference detonateInput;
     [SerializeField]
     private Transform castSourcePoint;
+    private SpellSelector spellSelector;
     //These will be filled by a serializedobject later
     [Header("Spell Settings")]
-    public BaseSpellObject spellObject;
+    public BaseSpellObject currentSpellObject;
     public GameObject spellProyectile;
     public string spellProyectileName;
     public float proyectileSpeed;
@@ -39,13 +40,14 @@ public class SpellCaster : MonoBehaviour
 
     void Start()
     {
-        ChangeSpell(spellObject);
+        spellSelector = GetComponent<SpellSelector>();
+        ChangeSpell(spellSelector.spellSlots[0].spells[0]);
     }
 
 
     void Update()
     {
-        spellObject.timeSinceLastCast += Time.deltaTime;
+        currentSpellObject.timeSinceLastCast += Time.deltaTime;
         if (isAutomatic)
         {
             AutomaticCasting();
@@ -58,10 +60,10 @@ public class SpellCaster : MonoBehaviour
 
     private void SemiAutomaticCasting()
     {
-        if (castLaunchInput.action.WasPressedThisFrame() && spellObject.timeSinceLastCast >= rate)
+        if (castLaunchInput.action.WasPressedThisFrame() && currentSpellObject.timeSinceLastCast >= rate)
         {
             //TODO cast launch animation and particles
-            spellObject.timeSinceLastCast = 0;
+            currentSpellObject.timeSinceLastCast = 0;
             CastProyectile();
         }
         if (detonateInput.action.WasPressedThisFrame())
@@ -69,9 +71,9 @@ public class SpellCaster : MonoBehaviour
             //TODO detonate animation and particles
             detonateAction.Invoke(currentAtributes);
         }
-        if (castAtSelfInput.action.WasPressedThisFrame() && spellObject.timeSinceLastCast >= rate)
+        if (castAtSelfInput.action.WasPressedThisFrame() && currentSpellObject.timeSinceLastCast >= rate)
         {
-            spellObject.timeSinceLastCast = 0;
+            currentSpellObject.timeSinceLastCast = 0;
             //TODO cast at self animation and particles
             castAtSelfAction.Invoke(gameObject, currentAtributes);
         }
@@ -79,10 +81,10 @@ public class SpellCaster : MonoBehaviour
 
     private void AutomaticCasting()
     {
-        if (castLaunchInput.action.IsPressed() && spellObject.timeSinceLastCast >= rate)
+        if (castLaunchInput.action.IsPressed() && currentSpellObject.timeSinceLastCast >= rate)
         {
             //TODO cast launch animation and particles
-            spellObject.timeSinceLastCast = 0;
+            currentSpellObject.timeSinceLastCast = 0;
             CastProyectile();
         }
         if (detonateInput.action.WasPressedThisFrame())
@@ -90,17 +92,18 @@ public class SpellCaster : MonoBehaviour
             //TODO detonate animation and particles
             detonateAction.Invoke(currentAtributes);
         }
-        if (castAtSelfInput.action.IsPressed() && spellObject.timeSinceLastCast >= rate)
+        if (castAtSelfInput.action.IsPressed() && currentSpellObject.timeSinceLastCast >= rate)
         {
-            spellObject.timeSinceLastCast = 0;
+            currentSpellObject.timeSinceLastCast = 0;
             //TODO cast at self animation and particles
             castAtSelfAction.Invoke(gameObject, currentAtributes);
         }
     }
 
-    private void ChangeSpell(BaseSpellObject newSpellObject)
+    public void ChangeSpell(BaseSpellObject newSpellObject)
     {
         //Functional
+        currentSpellObject = newSpellObject;
         spellProyectile = newSpellObject.spellProyectile;
         spellProyectileName = newSpellObject.spellProyectileName;
         proyectileSpeed = newSpellObject.proyectileSpeed;

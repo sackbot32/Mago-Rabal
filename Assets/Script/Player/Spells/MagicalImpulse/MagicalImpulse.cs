@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MagicalImpulse : SpellBase
 {
+
+    public GameObject pushParticlePrefab;
     public float pushForceForPlayer = 2500;
     public float pushForceForEnem = 600;
     //Floor has more friction so needs extra force to do the same ammount of distance
@@ -15,7 +17,7 @@ public class MagicalImpulse : SpellBase
     private string timeTillPushKey = "TimeTillPush";
     public void Hit(GameObject hitObj, List<SpellAtribute> atributes)
     {
-        SpellDetonations.instance.spellDetonatedDict[SpellType.MagicalImpulse] = false;
+        SpellDictionary.instance.spellDetonatedDict[SpellType.MagicalImpulse] = false;
         SpellEffects effectTarget = hitObj.GetComponent<SpellEffects>();
         if (effectTarget != null)
         {
@@ -41,17 +43,18 @@ public class MagicalImpulse : SpellBase
 
 
         float timer = 0;
-        while (!SpellDetonations.instance.spellDetonatedDict[SpellType.MagicalImpulse] && timer < trueTimeTillPush)
+        while (!SpellDictionary.instance.spellDetonatedDict[SpellType.MagicalImpulse] && timer < trueTimeTillPush)
         {
             timer += Time.deltaTime;
             yield return null;
         }
-        Debug.Log("Detonado?: " + SpellDetonations.instance.spellDetonatedDict[SpellType.MagicalImpulse]);
+        Debug.Log("Detonado?: " + SpellDictionary.instance.spellDetonatedDict[SpellType.MagicalImpulse]);
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         Vector3 targetPoint;
         targetPoint = ray.GetPoint(5);
         Vector3 impulseDir = targetPoint - hitObj.transform.position;
-
+        SpellDictionary.instance.spellGameObjectDict.TryGetValue("PushParticle",out pushParticlePrefab);
+        GameObject.Instantiate(pushParticlePrefab, hitObj.transform.position, Quaternion.identity).transform.up = impulseDir;
         hitObj.GetComponent<Rigidbody>()?.AddForce(impulseDir.normalized * trueEnemyPush);
 
 
@@ -59,7 +62,7 @@ public class MagicalImpulse : SpellBase
 
     public void Detonate(List<SpellAtribute> atributes)
     {
-        SpellDetonations.instance.spellDetonatedDict[SpellType.MagicalImpulse] = true;
+        SpellDictionary.instance.spellDetonatedDict[SpellType.MagicalImpulse] = true;
 
     }
 

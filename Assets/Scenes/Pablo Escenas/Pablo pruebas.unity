@@ -910,6 +910,7 @@ GameObject:
   - component: {fileID: 556350056}
   - component: {fileID: 556350055}
   - component: {fileID: 556350057}
+  - component: {fileID: 556350058}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1070,7 +1071,7 @@ MonoBehaviour:
   detonateInput: {fileID: 841008178004940394, guid: 2dd9c78e2b3faf84d88fe384166a1d62,
     type: 3}
   castSourcePoint: {fileID: 1140950783}
-  spellObject: {fileID: 11400000, guid: 0bc2ac22bd67a094eaef688fbb1bdb64, type: 2}
+  currentSpellObject: {fileID: 0}
   spellProyectile: {fileID: 5755890348237091507, guid: 1f8121059f34d194a84aa638f54c8c13,
     type: 3}
   spellProyectileName: 
@@ -1082,6 +1083,24 @@ MonoBehaviour:
   currentAtributes: []
   castParticle: {fileID: 0}
   proyectileHitParticle: {fileID: 0}
+--- !u!114 &556350058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556350051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfa3b5f7b935df47a5454e5165a102f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellSlots:
+  - spells:
+    - {fileID: 11400000, guid: 0bc2ac22bd67a094eaef688fbb1bdb64, type: 2}
+  - spells:
+    - {fileID: 11400000, guid: 7800b64cb545fc142832c91732ffa43d, type: 2}
+  selectInput: {fileID: 0}
 --- !u!1 &612099746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,6 +1145,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291fab4146b3822488a0685913774c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forGameObjectDict:
+  - name: SpellExplosion
+    gameObject: {fileID: 1877787682879753461, guid: 7b462f574fd027c4cb466bc89eae56df,
+      type: 3}
+  - name: SpellExplosionParticle
+    gameObject: {fileID: 100008, guid: f55f0defa3c68c1498d7f9cae620bc19, type: 3}
+  - name: PushParticle
+    gameObject: {fileID: 100014, guid: 8fdf283554cb4fc4cb91ad1957a41c21, type: 3}
 --- !u!1 &705691336
 GameObject:
   m_ObjectHideFlags: 0

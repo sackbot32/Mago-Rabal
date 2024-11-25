@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb3c0fadefac67844bbc5ea827d768c8, type: 3}
   m_Name: Example B
   m_EditorClassIdentifier: 
-  spellProyectileMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  spellProyectile: {fileID: 5755890348237091507, guid: 4b912f27b3c40684ea9eab8051a3364b,
+    type: 3}
+  spellProyectileName: 
   proyectileSpeed: 10
   rate: 0.5
+  isAutomatic: 0
   tagProyectileDetects:
   - Floor
-  spellType: 0
-  timeSinceLastCast: 1.7738532
+  spellType: 1
+  atributes: []
+  castParticle: {fileID: 0}
+  proyectileHitParticle: {fileID: 0}
+  timeSinceLastCast: 0.5692947
