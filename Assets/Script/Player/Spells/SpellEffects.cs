@@ -1,10 +1,22 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpellEffects : MonoBehaviour
 {
-    public void StartRecievedCoroutine(IEnumerator coroutine)
+    public List<string> corroutineNames;
+
+    private void Start()
     {
-        StartCoroutine(coroutine);
+        corroutineNames = new List<string>();
     }
+    public void StartRecievedCoroutine(IEnumerator coroutine,string name)
+    {
+        if (!corroutineNames.Contains(name))
+        {
+            corroutineNames.Add(name);
+            StartCoroutine(coroutine);
+        }
+    }
+
 }

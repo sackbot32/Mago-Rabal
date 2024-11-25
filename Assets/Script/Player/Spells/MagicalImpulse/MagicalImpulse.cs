@@ -15,13 +15,14 @@ public class MagicalImpulse : SpellBase
     private string playerPushAtributeKey = "PlayerPush";
     private string playerPushMultAtributeKey = "PlayerPushMult";
     private string timeTillPushKey = "TimeTillPush";
+    private string impulseEffectKey = "Impulse";
     public void Hit(GameObject hitObj, List<SpellAtribute> atributes)
     {
         SpellDictionary.instance.spellDetonatedDict[SpellType.MagicalImpulse] = false;
         SpellEffects effectTarget = hitObj.GetComponent<SpellEffects>();
         if (effectTarget != null)
         {
-            effectTarget.StartRecievedCoroutine(PushEnemiesUp(hitObj,atributes));
+            effectTarget.StartRecievedCoroutine(PushEnemiesUp(hitObj,atributes),impulseEffectKey);
         } 
     }
 
@@ -56,7 +57,7 @@ public class MagicalImpulse : SpellBase
         SpellDictionary.instance.spellGameObjectDict.TryGetValue("PushParticle",out pushParticlePrefab);
         GameObject.Instantiate(pushParticlePrefab, hitObj.transform.position, Quaternion.identity).transform.up = impulseDir;
         hitObj.GetComponent<Rigidbody>()?.AddForce(impulseDir.normalized * trueEnemyPush);
-
+        hitObj.GetComponent<SpellEffects>().corroutineNames.Remove(impulseEffectKey);
 
     }
 

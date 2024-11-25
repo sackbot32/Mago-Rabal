@@ -1100,7 +1100,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0bc2ac22bd67a094eaef688fbb1bdb64, type: 2}
   - spells:
     - {fileID: 11400000, guid: 7800b64cb545fc142832c91732ffa43d, type: 2}
-  selectInput: {fileID: 0}
+  selectInput: {fileID: -944628639613478452, guid: 2dd9c78e2b3faf84d88fe384166a1d62,
+    type: 3}
 --- !u!1 &612099746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,13 +1147,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forGameObjectDict:
+  - name: PushParticle
+    gameObject: {fileID: 100014, guid: 8fdf283554cb4fc4cb91ad1957a41c21, type: 3}
   - name: SpellExplosion
     gameObject: {fileID: 1877787682879753461, guid: 7b462f574fd027c4cb466bc89eae56df,
       type: 3}
   - name: SpellExplosionParticle
     gameObject: {fileID: 100008, guid: f55f0defa3c68c1498d7f9cae620bc19, type: 3}
-  - name: PushParticle
-    gameObject: {fileID: 100014, guid: 8fdf283554cb4fc4cb91ad1957a41c21, type: 3}
 --- !u!1 &705691336
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,6 +2027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cff92af1f8ce6f47babb9f1a8b88ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  corroutineNames: []
 --- !u!1 &2093243684
 GameObject:
   m_ObjectHideFlags: 0

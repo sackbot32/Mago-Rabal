@@ -26,32 +26,46 @@ public class SpellSelector : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (selectInput.FindAction("1").WasPressedThisFrame())
         {
             ChangeSlot(0);
             ChangeSpell(currentSpellSlot, weaponSelectedSlot[currentSpellSlot]);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (selectInput.FindAction("2").WasPressedThisFrame())
         {
             ChangeSlot(1);
+            ChangeSpell(currentSpellSlot, weaponSelectedSlot[currentSpellSlot]);
+        }
+        if (selectInput.FindAction("3").WasPressedThisFrame())
+        {
+            ChangeSlot(2);
+            ChangeSpell(currentSpellSlot, weaponSelectedSlot[currentSpellSlot]);
+        }
+        if (selectInput.FindAction("4").WasPressedThisFrame())
+        {
+            ChangeSlot(3);
             ChangeSpell(currentSpellSlot, weaponSelectedSlot[currentSpellSlot]);
         }
     }
 
     private void ChangeSlot(int newSpellSlot)
     {
-        if (currentSpellSlot != newSpellSlot)
+        if (newSpellSlot < weaponSelectedSlot.Length)
         {
-            currentSpellSlot = newSpellSlot;
-            weaponSelectedSlot[currentSpellSlot] = 0;
-        }
-        else
-        {
-            weaponSelectedSlot[currentSpellSlot] += 1;
-        }
-        if(weaponSelectedSlot[currentSpellSlot] >= spellSlots[currentSpellSlot].spells.Length)
-        {
-            weaponSelectedSlot[currentSpellSlot] = 0;
+
+            if (currentSpellSlot != newSpellSlot)
+            {
+                currentSpellSlot = newSpellSlot;
+                weaponSelectedSlot[currentSpellSlot] = 0;
+            }
+            else
+            {
+                weaponSelectedSlot[currentSpellSlot] += 1;
+            }
+            if(weaponSelectedSlot[currentSpellSlot] >= spellSlots[currentSpellSlot].spells.Length)
+            {
+                weaponSelectedSlot[currentSpellSlot] = 0;
+            }
         }
     }
 

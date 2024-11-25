@@ -10,6 +10,7 @@ public class Fireball : SpellBase
     public GameObject explosionParticlePrefab;
     private string damageKey = "Damage";
     private string expDamageKey = "ExplosionDamage";
+    private string explosionEffectKey = "FireballExplode";
 
     public void Hit(GameObject hitObj, List<SpellAtribute> atributes)
     {
@@ -60,7 +61,7 @@ public class Fireball : SpellBase
         SpellEffects effectTarget = proyectile.GetComponent<SpellEffects>();
         if (effectTarget != null)
         {
-            effectTarget.StartRecievedCoroutine(ExplosionByDet(proyectile,trueExplosionDamage));
+            effectTarget.StartRecievedCoroutine(ExplosionByDet(proyectile,trueExplosionDamage),explosionEffectKey);
         }
 
     }
@@ -85,6 +86,7 @@ public class Fireball : SpellBase
             newExplo.GetComponent<SpellExplosion>().ExplodeParticle();
 
         }
+        proyectile.GetComponent<SpellEffects>().corroutineNames.Remove(explosionEffectKey);
         GameObject.Destroy(proyectile);
     }
 
