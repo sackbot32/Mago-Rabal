@@ -34,6 +34,7 @@ public static class SpellManager
             case (SpellType.Bless):
                 break;
             case (SpellType.Teleport):
+                sentSpell = new Teleport();
                 break;
                 
         }

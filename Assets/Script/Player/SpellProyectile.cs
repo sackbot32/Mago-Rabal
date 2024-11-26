@@ -57,8 +57,18 @@ public class SpellProyectile : MonoBehaviour
             }
         }
 
+
         if (hasActionInvokeTag)
         {
+            SpellAtribute x = currentAtributes.Find(newX => newX.name == "HitPosX");
+            SpellAtribute y = currentAtributes.Find(newY => newY.name == "HitPosY");
+            SpellAtribute z = currentAtributes.Find(newZ => newZ.name == "HitPosZ");
+            currentAtributes.Remove(x);
+            currentAtributes.Remove(y);
+            currentAtributes.Remove(z);
+            currentAtributes.Add(new SpellAtribute("HitPosX", transform.position.x));
+            currentAtributes.Add(new SpellAtribute("HitPosY", transform.position.y));
+            currentAtributes.Add(new SpellAtribute("HitPosZ", transform.position.z));
             onHitAction.Invoke(other.gameObject,currentAtributes);
             if(hitParticle != null)
             {
