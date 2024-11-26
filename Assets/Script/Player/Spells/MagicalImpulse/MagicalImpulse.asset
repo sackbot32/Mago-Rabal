@@ -23,7 +23,7 @@ MonoBehaviour:
   spellType: 3
   atributes:
   - name: EnemPush
-    value: 500
+    value: 1000
   - name: PlayerPush
     value: 3000
   - name: PlayerPushMult
@@ -32,4 +32,4 @@ MonoBehaviour:
     value: 6
   castParticle: {fileID: 0}
   proyectileHitParticle: {fileID: 0}
-  timeSinceLastCast: 3.6010926
+  timeSinceLastCast: 7.649358
