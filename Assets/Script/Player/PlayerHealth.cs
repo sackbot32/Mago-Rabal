@@ -4,8 +4,11 @@ public class PlayerHealth : MonoBehaviour, IHealth
 {
     //Settings
     public float maxHealth;
+    public float damageMultiplierForDefense;
     //Data
+    [SerializeField]
     private float currentHealth;
+    public bool defenseOn;
     void Start()
     {
         currentHealth = maxHealth;
@@ -14,7 +17,13 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        if (defenseOn)
+        {
+            currentHealth -= damage*damageMultiplierForDefense;
+        } else
+        {
+            currentHealth -= damage;
+        }
         if(currentHealth <= 0 )
         {
             currentHealth = 0;

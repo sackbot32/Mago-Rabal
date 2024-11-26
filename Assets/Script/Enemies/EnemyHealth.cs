@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
     //Settings
     public float maxHealth;
     //Data
+    [SerializeField]
     private float currentHealth;
     void Start()
     {

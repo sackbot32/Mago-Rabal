@@ -20,8 +20,23 @@ MonoBehaviour:
   isAutomatic: 0
   tagProyectileDetects:
   - Enemy
+  - Player
   spellType: 4
-  atributes: []
+  atributes:
+  - name: TotalDamage
+    value: 10
+  - name: DamageRate
+    value: 1
+  - name: BlessDuration
+    value: 10
+  - name: CanBlow
+    value: 1
+  - name: HitPosX
+    value: -8.632933
+  - name: HitPosY
+    value: 0.8436144
+  - name: HitPosZ
+    value: -1.6967545
   castParticle: {fileID: 0}
   proyectileHitParticle: {fileID: 0}
-  timeSinceLastCast: 0
+  timeSinceLastCast: 4.9361153

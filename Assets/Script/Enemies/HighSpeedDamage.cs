@@ -4,7 +4,6 @@ public class HighSpeedDamage : MonoBehaviour
 {
     //Components
     private IHealth targetHealth;
-    public GameObject testObject;
     //Setting
     public float speedMagnitudeThreshold;
         //Should be taken by the magnitude of the speed

@@ -79,7 +79,7 @@ public class Fireball : SpellBase
             yield return null;
         }
         SpellDictionary.instance.spellGameObjectDict.TryGetValue("SpellExplosion", out explosionPrefab);
-        SpellDictionary.instance.spellGameObjectDict.TryGetValue("SpellExplosionParticle", out explosionParticlePrefab);
+        SpellDictionary.instance.spellGameObjectDict.TryGetValue("FireSpellExplosionParticle", out explosionParticlePrefab);
         if (explosionPrefab != null)
         {
             //Need to add proper explosion
