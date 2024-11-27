@@ -123,7 +123,10 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     {
         //if in group, send to group
         ChooseCoverPoint();
-        shootCoroutine = StartCoroutine(ShootProcess());
+        if(player != null)
+        {
+            shootCoroutine = StartCoroutine(ShootProcess());
+        }
         
         print("going to cover at " + agent.destination);
     }
