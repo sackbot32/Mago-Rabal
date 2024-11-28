@@ -25,11 +25,11 @@ MonoBehaviour:
   - name: Damage
     value: 5
   - name: HitPosX
-    value: -0.58785325
+    value: 8.472243
   - name: HitPosY
-    value: 1.5002788
+    value: 1.6341524
   - name: HitPosZ
-    value: 19.67637
+    value: -23.471682
   castParticle: {fileID: 0}
   proyectileHitParticle: {fileID: 0}
   timeSinceLastCast: 0

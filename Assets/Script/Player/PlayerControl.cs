@@ -63,8 +63,8 @@ public class PlayerControl : MonoBehaviour
         canSprint = true;
         sprinting = false;
         currentSprintValue = maxSprintValue;
-        sprintBar.maxValue = maxSprintValue;
-        sprintBar.value = currentSprintValue;
+        //sprintBar.maxValue = maxSprintValue;
+        //sprintBar.value = currentSprintValue;
         layer = LayerMask.GetMask("Ground");
         canJump = false;
         rb = GetComponent<Rigidbody>();
@@ -216,7 +216,7 @@ public class PlayerControl : MonoBehaviour
         while(sprinting && (currentSprintValue > 0))
         {
             currentSprintValue -= sprintDrainingAmmount;
-            sprintBar.value = currentSprintValue;
+            //sprintBar.value = currentSprintValue;
             yield return new WaitForSeconds(sprintDrainingRate);
         }
         
@@ -236,7 +236,7 @@ public class PlayerControl : MonoBehaviour
         while (!sprinting && (currentSprintValue < maxSprintValue))
         {
             currentSprintValue += sprintDrainingAmmount;
-            sprintBar.value = currentSprintValue;
+            //sprintBar.value = currentSprintValue;
             yield return new WaitForSeconds(sprintDrainingRate);
         }
         if(currentSprintValue > maxSprintValue)
@@ -252,7 +252,7 @@ public class PlayerControl : MonoBehaviour
         while ((currentSprintValue < maxSprintValue))
         {
             currentSprintValue += sprintDrainingAmmount/2;
-            sprintBar.value = currentSprintValue;
+            //sprintBar.value = currentSprintValue;
             yield return new WaitForSeconds(sprintDrainingRate);
         }
         if (currentSprintValue > maxSprintValue)
