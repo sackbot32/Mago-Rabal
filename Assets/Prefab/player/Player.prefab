@@ -180,6 +180,7 @@ MonoBehaviour:
   armAnim: {fileID: 7753866104666348652}
   spellImage: {fileID: 6700578304199699583}
   currentSpellObject: {fileID: 0}
+  currentImage: {fileID: 0}
   spellProyectile: {fileID: 5755890348237091507, guid: 1f8121059f34d194a84aa638f54c8c13,
     type: 3}
   spellProyectileName: 
@@ -887,7 +888,7 @@ PrefabInstance:
     - target: {fileID: 971985098900465612, guid: fb02d94a7770a6e42afdb3a104ff0cf0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.286
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 971985098900465612, guid: fb02d94a7770a6e42afdb3a104ff0cf0,
         type: 3}

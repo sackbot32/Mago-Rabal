@@ -10,7 +10,7 @@ public class SpellSlot
 }
 public class SpellSelector : MonoBehaviour
 {
-    private SpellCaster spellCaster;
+    public SpellCaster spellCaster;
     public SpellSlot[] spellSlots;
     public InputActionAsset selectInput;
 
@@ -19,8 +19,7 @@ public class SpellSelector : MonoBehaviour
 
     void Start()
     {
-        weaponSelectedSlot = new int[spellSlots.Length];
-        spellCaster = GetComponent<SpellCaster>();
+        weaponSelectedSlot = new int[4];
     }
 
 
@@ -71,6 +70,10 @@ public class SpellSelector : MonoBehaviour
 
     private void ChangeSpell(int slot, int selectedInSlot)
     {
+        if(spellCaster == null)
+        {
+            spellCaster = GameManager.instance.player.GetComponent<SpellCaster>();
+        }
         if(spellSlots[slot].spells[selectedInSlot] != null)
         {
             spellCaster.ChangeSpell(spellSlots[slot].spells[selectedInSlot]);
