@@ -60,18 +60,10 @@ public class MagicalImpulseEffect : MonoBehaviour
             yield return null;
         }
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        //RaycastHit hit;
         Vector3 targetPoint;
         targetPoint = ray.GetPoint(5);
         Vector3 impulseDir = targetPoint - transform.position;
-        //if (Physics.Raycast(ray, out hit))
-        //{
-        //    targetPoint = hit.point;
-        //}
-        //else
-        //{
-        //    targetPoint = ray.GetPoint(5);
-        //}
+
         rb.AddForce(impulseDir.normalized * force);
         detonated = false;
         selfImpulseEffect.enabled = false;

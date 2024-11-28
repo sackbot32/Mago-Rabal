@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb3c0fadefac67844bbc5ea827d768c8, type: 3}
+  m_Name: Teleport
+  m_EditorClassIdentifier: 
+  spellProyectile: {fileID: 5755890348237091507, guid: 8c48dc054d7447e469e84cdf292d0458,
+    type: 3}
+  spellProyectileName: Teleport
+  proyectileSpeed: 20
+  rate: 0.1
+  isAutomatic: 0
+  tagProyectileDetects:
+  - Enemy
+  - Floor
+  spellType: 5
+  atributes:
+  - name: HitPosX
+    value: -1.0550332
+  - name: HitPosY
+    value: 0.57502574
+  - name: HitPosZ
+    value: 4.352218
+  castParticle: {fileID: 0}
+  proyectileHitParticle: {fileID: 0}
+  timeSinceLastCast: 1.6229601

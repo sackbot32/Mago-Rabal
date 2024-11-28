@@ -18,4 +18,9 @@ public class BasicSpellTestB : SpellBase
     {
         Debug.Log("B test SelfCasted");
     }
+
+    public void ApplyToProyectile(GameObject proyectile, List<SpellAtribute> atributes)
+    {
+        Debug.Log("B test applied to " + proyectile.name);
+    }
 }

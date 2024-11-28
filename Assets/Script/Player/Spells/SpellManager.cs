@@ -32,8 +32,10 @@ public static class SpellManager
                 sentSpell = new MagicalImpulse();
                 break;
             case (SpellType.Bless):
+                sentSpell = new Bless();
                 break;
             case (SpellType.Teleport):
+                sentSpell = new Teleport();
                 break;
                 
         }

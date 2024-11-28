@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb3c0fadefac67844bbc5ea827d768c8, type: 3}
+  m_Name: Bless
+  m_EditorClassIdentifier: 
+  spellProyectile: {fileID: 5755890348237091507, guid: 123e90ce4826fa34f920294bb5a27492,
+    type: 3}
+  spellProyectileName: Bless
+  proyectileSpeed: 10
+  rate: 0.5
+  isAutomatic: 0
+  tagProyectileDetects:
+  - Enemy
+  - Player
+  spellType: 4
+  atributes:
+  - name: TotalDamage
+    value: 10
+  - name: DamageRate
+    value: 1
+  - name: BlessDuration
+    value: 10
+  - name: CanBlow
+    value: 1
+  - name: HitPosX
+    value: -8.632933
+  - name: HitPosY
+    value: 0.8436144
+  - name: HitPosZ
+    value: -1.6967545
+  castParticle: {fileID: 0}
+  proyectileHitParticle: {fileID: 0}
+  timeSinceLastCast: 4.9361153
