@@ -10,7 +10,14 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     //Components
     private StateMachine brain;
     private NavMeshAgent agent;
+    [SerializeField]
     private Transform aim;
+    [SerializeField] 
+    private ParentConstraint parentConstraint;
+    [SerializeField]
+    private Animator anim;
+    [SerializeField]
+    private ActionForAnimEvent animEvent;
     //Settings
     public Transform patrolPointsParent;
     public float tooCloseToPlayer;
@@ -26,12 +33,14 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     private float distanceFromPlayer;
     private Vector3 lastPointSeen;
     private Coroutine shootCoroutine;
+    private Vector3 previousPosition;
+    private float curSpeed;
     void Start()
     {
         lastPointSeen = Vector3.zero;
         agent = GetComponent<NavMeshAgent>();
         brain = GetComponent<StateMachine>();
-        aim = transform.GetChild(0).transform;
+        //aim = transform.GetChild(0).transform;
         coverPoints = new List<Transform>();
         if(patrolPointsParent == null && GameObject.FindGameObjectWithTag("PatrolParent") != null)
         {
@@ -40,6 +49,10 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
         foreach (GameObject coverGM in GameObject.FindGameObjectsWithTag("Cover"))
         {
             coverPoints.Add(coverGM.transform);
+        }
+        if(animEvent != null)
+        {
+            animEvent.actionList.Add(ShootSpell);
         }
         brain.PushState(ExecutePatrol,EnterPatrol,ExitPatrol);
     }
@@ -56,6 +69,14 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
         {
             Patrol();
         }
+        if (this.enabled)
+        {
+            Vector3 curMove = transform.position - previousPosition;
+            curSpeed = curMove.magnitude / Time.deltaTime;
+            previousPosition = transform.position;
+            print("currentSpeed: " + curSpeed);
+            anim.SetFloat("Speed",curSpeed);
+        }
     }
 
     public void SetPlayer(GameObject newPlayer, bool detected)
@@ -67,12 +88,20 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
         }
     }
 
+    public void TurnOff()
+    {
+        parentConstraint.enabled = false;
+        this.enabled = false;
+        anim.SetFloat("Speed", 0);
+    }
     private void LookAtPlayer(bool doIt)
     {
         
         if (doIt && player != null)
         {
             aim.transform.forward = (player.transform.position - aim.transform.position).normalized;
+            //aim.LookAt(player.transform.position);
+            //aim.transform.localRotation = Quaternion.Euler(aim.rotation.eulerAngles.x, aim.rotation.eulerAngles.y, 0);
         } else
         { 
             aim.transform.localRotation = Quaternion.Euler(Vector3.zero);
@@ -188,7 +217,16 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
         {
             if(distanceFromPlayer > tooCloseToPlayer)
             {
-                ShootSpell();
+                if(player != null && playerSeen)
+                {
+                    if (this.enabled)
+                    {
+                        anim.Play("lanzarhechizo",1);
+                    } else
+                    {
+                        break;
+                    }
+                }
                 yield return new WaitForSeconds(spellObject.rate);
             } else
             {
@@ -200,7 +238,8 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     private void ShootSpell()
     {
         GameObject newProyectile = Instantiate(spellObject.spellProyectile, shootPoint.position, shootPoint.rotation);
-        newProyectile.GetComponent<Rigidbody>().linearVelocity = shootPoint.forward * spellObject.proyectileSpeed;
+        Vector3 shootDir = player.transform.position - shootPoint.position;
+        newProyectile.GetComponent<Rigidbody>().linearVelocity = shootDir.normalized * spellObject.proyectileSpeed;
         newProyectile.GetComponent<SpellProyectile>().SetProyectileSettings(SpellManager.ReturnSpell(spellObject.spellType).Hit, spellObject.atributes,
         spellObject.tagProyectileDetects, spellObject.spellProyectileName, spellObject.proyectileHitParticle);
     }
