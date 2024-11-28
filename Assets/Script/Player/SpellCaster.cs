@@ -5,6 +5,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SpellCaster : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class SpellCaster : MonoBehaviour
     //These will be filled by a serializedobject later
     [Header("Spell Settings")]
     public BaseSpellObject currentSpellObject;
+    public Sprite currentImage;
     public GameObject spellProyectile;
     public string spellProyectileName;
     public float proyectileSpeed;
@@ -46,6 +48,7 @@ public class SpellCaster : MonoBehaviour
 
     void Start()
     {
+        DOTween.Init();
         spellSelector = GetComponent<SpellSelector>();
         ChangeSpell(spellSelector.spellSlots[0].spells[0]);
     }
@@ -126,7 +129,8 @@ public class SpellCaster : MonoBehaviour
         isAutomatic = newSpellObject.isAutomatic;
         tagProyectileDetects = newSpellObject.tagProyectileDetects;
         currentAtributes = newSpellObject.atributes;
-        StartCoroutine(ChangeImage(newSpellObject.spellSprite));
+        currentImage = newSpellObject.spellSprite;
+        StartCoroutine(ChangeImage(currentImage));
         onProyectileAction = SpellManager.ReturnSpell(newSpellObject.spellType).ApplyToProyectile;
         hitAction = SpellManager.ReturnSpell(newSpellObject.spellType).Hit;
         castAtSelfAction = SpellManager.ReturnSpell(newSpellObject.spellType).SelfCast;
@@ -135,7 +139,17 @@ public class SpellCaster : MonoBehaviour
 
     private IEnumerator ChangeImage(Sprite newImage)
     {
+        DOTween.To(() => spellImage.color, x=> spellImage.color = x, new Color(1,1,1,0),0.25f);
+        while(spellImage.color.a > 0)
+        {
+            yield return null;
+        }
         spellImage.sprite = newImage;
+        while(spellImage.sprite != currentImage)
+        {
+            spellImage.sprite = currentImage;
+        }
+        DOTween.To(() => spellImage.color, x => spellImage.color = x, new Color(1, 1, 1, 1), 0.15f);
         yield return null;
     }
 
