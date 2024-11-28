@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class SpellCaster : MonoBehaviour
 {
@@ -15,6 +17,10 @@ public class SpellCaster : MonoBehaviour
     private InputActionReference detonateInput;
     [SerializeField]
     private Transform castSourcePoint;
+    [SerializeField]
+    private Animator armAnim;
+    [SerializeField]
+    private Image spellImage;
     private SpellSelector spellSelector;
     //These will be filled by a serializedobject later
     [Header("Spell Settings")]
@@ -64,15 +70,19 @@ public class SpellCaster : MonoBehaviour
         {
             //TODO cast launch animation and particles
             currentSpellObject.timeSinceLastCast = 0;
+            armAnim.Play("lanzar", -1, 0);
+            armAnim.SetBool("AutomaticShooting", false);
             CastProyectile();
         }
         if (detonateInput.action.WasPressedThisFrame())
         {
             //TODO detonate animation and particles
+            armAnim.Play("cerrar");
             detonateAction.Invoke(currentAtributes);
         }
         if (castAtSelfInput.action.WasPressedThisFrame() && currentSpellObject.timeSinceLastCast >= rate)
         {
+            armAnim.Play("amimismo", -1, 0);
             currentSpellObject.timeSinceLastCast = 0;
             //TODO cast at self animation and particles
             castAtSelfAction.Invoke(gameObject, currentAtributes);
@@ -85,15 +95,20 @@ public class SpellCaster : MonoBehaviour
         {
             //TODO cast launch animation and particles
             currentSpellObject.timeSinceLastCast = 0;
+            armAnim.SetBool("AutomaticShooting", true);
             CastProyectile();
         }
+        armAnim.SetBool("AutomaticShooting", castLaunchInput.action.IsPressed());
+
         if (detonateInput.action.WasPressedThisFrame())
         {
             //TODO detonate animation and particles
+            armAnim.Play("cerrar");
             detonateAction.Invoke(currentAtributes);
         }
         if (castAtSelfInput.action.WasPressedThisFrame() && currentSpellObject.timeSinceLastCast >= rate)
         {
+            armAnim.Play("amimismo", -1, 0);
             currentSpellObject.timeSinceLastCast = 0;
             //TODO cast at self animation and particles
             castAtSelfAction.Invoke(gameObject, currentAtributes);
@@ -111,10 +126,17 @@ public class SpellCaster : MonoBehaviour
         isAutomatic = newSpellObject.isAutomatic;
         tagProyectileDetects = newSpellObject.tagProyectileDetects;
         currentAtributes = newSpellObject.atributes;
+        StartCoroutine(ChangeImage(newSpellObject.spellSprite));
         onProyectileAction = SpellManager.ReturnSpell(newSpellObject.spellType).ApplyToProyectile;
         hitAction = SpellManager.ReturnSpell(newSpellObject.spellType).Hit;
         castAtSelfAction = SpellManager.ReturnSpell(newSpellObject.spellType).SelfCast;
         detonateAction = SpellManager.ReturnSpell(newSpellObject.spellType).Detonate;
+    }
+
+    private IEnumerator ChangeImage(Sprite newImage)
+    {
+        spellImage.sprite = newImage;
+        yield return null;
     }
 
     private void CastProyectile()

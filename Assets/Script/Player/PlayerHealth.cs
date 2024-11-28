@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour, IHealth
 {
+    //Components
+    [SerializeField]
+    private Slider healthBar;
     //Settings
     public float maxHealth;
     public float damageMultiplierForDefense;
@@ -11,7 +15,9 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public bool defenseOn;
     void Start()
     {
+        healthBar.maxValue = maxHealth;
         currentHealth = maxHealth;
+        healthBar.value = currentHealth;
     }
 
 
@@ -24,7 +30,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
         {
             currentHealth -= damage;
         }
-        if(currentHealth <= 0 )
+        healthBar.value = currentHealth;
+        if (currentHealth <= 0 )
         {
             currentHealth = 0;
             Death();
@@ -34,7 +41,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public void Heal(float healing)
     {
         currentHealth += healing;
-        if(currentHealth >= maxHealth )
+        healthBar.value = currentHealth;
+        if (currentHealth >= maxHealth )
         {
             currentHealth = maxHealth;
         }

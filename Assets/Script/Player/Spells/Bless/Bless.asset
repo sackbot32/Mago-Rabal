@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellProyectile: {fileID: 5755890348237091507, guid: 123e90ce4826fa34f920294bb5a27492,
     type: 3}
+  spellSprite: {fileID: 21300000, guid: 98f9da815d70f264a9d8fa5c4c7e54d0, type: 3}
   spellProyectileName: Bless
   proyectileSpeed: 10
   rate: 0.5

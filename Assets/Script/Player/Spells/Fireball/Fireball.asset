@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellProyectile: {fileID: 5755890348237091507, guid: c9ec31b09342dd6479f33fba55c0ed13,
     type: 3}
+  spellSprite: {fileID: 21300000, guid: c5a6e6f7e28bbf14c82e2abf4993f1e1, type: 3}
   spellProyectileName: Fire
   proyectileSpeed: 20
   rate: 0.1

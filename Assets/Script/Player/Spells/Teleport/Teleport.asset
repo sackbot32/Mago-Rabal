@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellProyectile: {fileID: 5755890348237091507, guid: 8c48dc054d7447e469e84cdf292d0458,
     type: 3}
+  spellSprite: {fileID: 21300000, guid: f5b6e62170f451b429e540c3aece9572, type: 3}
   spellProyectileName: Teleport
   proyectileSpeed: 20
   rate: 0.1
