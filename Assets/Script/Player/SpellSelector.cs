@@ -82,4 +82,38 @@ public class SpellSelector : MonoBehaviour
             print("error, no existe hechizo");
         }
     }
+
+    public bool ContainsThisSpell(BaseSpellObject spellToCheck)
+    {
+        bool contains = false;
+        foreach (SpellSlot slot in spellSlots)
+        {
+            foreach (BaseSpellObject spell in slot.spells)
+            {
+                if(spell == spellToCheck)
+                {
+                    contains = true;
+                }
+            }
+        }
+
+        return contains;
+    }
+
+    public void AddSpell(BaseSpellObject newSpell,int slot,int posInSlot)
+    {
+        BaseSpellObject oldSpellAtPoint;
+        if(spellSlots[slot].spells[posInSlot] != null)
+        {
+            oldSpellAtPoint = spellSlots[slot].spells[posInSlot];
+            spellSlots[slot].spells[posInSlot] = newSpell;
+            for (int i = 0; i < spellSlots[slot].spells.Length; i++)
+            {
+                spellSlots[slot].spells[i] = oldSpellAtPoint;
+            }
+        } else
+        {
+            spellSlots[slot].spells[posInSlot] = newSpell;
+        }
+    }
 }
