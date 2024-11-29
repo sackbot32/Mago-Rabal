@@ -11,7 +11,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -6143455316439857056}
-    m_Position: {x: 390, y: 250, z: 0}
+    m_Position: {x: 440, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -247252855670651103}
     m_Position: {x: 380, y: 70, z: 0}
@@ -22,18 +22,19 @@ AnimatorStateMachine:
     m_State: {fileID: -2325547542648894119}
     m_Position: {x: 410, y: -20, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 3186222562726967540}
-    m_Position: {x: 370, y: 320, z: 0}
+    m_State: {fileID: 1777865020683012419}
+    m_Position: {x: 400, y: 340, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
-  m_EntryTransitions: []
+  m_EntryTransitions:
+  - {fileID: 7570213528371107539}
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_EntryPosition: {x: 50, y: 200, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -6143455316439857056}
+  m_DefaultState: {fileID: 1777865020683012419}
 --- !u!1102 &-6143455316439857056
 AnimatorState:
   serializedVersion: 6
@@ -137,7 +138,7 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1102 &3186222562726967540
+--- !u!1102 &1777865020683012419
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -157,8 +158,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 6093225430303232669, guid: 029eb3f5a22cf1747902aac28925f9f1,
-    type: 3}
+  m_Motion: {fileID: 7400000, guid: 37c7c570e3381e341bae2485ca63e8c4, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -191,3 +191,17 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1109 &7570213528371107539
+AnimatorTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1777865020683012419}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 1
