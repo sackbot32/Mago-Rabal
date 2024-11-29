@@ -1840,6 +1840,74 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &70529336658864155
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6684247425182127981, guid: f34cfef2d86dc0340b8b1238e7e67227,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -28.07399
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684247425182127981, guid: f34cfef2d86dc0340b8b1238e7e67227,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -36.768234
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684247425182127981, guid: f34cfef2d86dc0340b8b1238e7e67227,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -115.2035
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684247425182127981, guid: f34cfef2d86dc0340b8b1238e7e67227,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684247425182127981, guid: f34cfef2d86dc0340b8b1238e7e67227,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684247425182127981, guid: f34cfef2d86dc0340b8b1238e7e67227,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684247425182127981, guid: f34cfef2d86dc0340b8b1238e7e67227,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684247425182127981, guid: f34cfef2d86dc0340b8b1238e7e67227,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684247425182127981, guid: f34cfef2d86dc0340b8b1238e7e67227,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684247425182127981, guid: f34cfef2d86dc0340b8b1238e7e67227,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929510872821120637, guid: f34cfef2d86dc0340b8b1238e7e67227,
+        type: 3}
+      propertyPath: m_Name
+      value: Innovacion
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f34cfef2d86dc0340b8b1238e7e67227, type: 3}
 --- !u!1001 &801236043349204505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2074,3 +2142,4 @@ SceneRoots:
   - {fileID: 8127392859502027347}
   - {fileID: 9004611709404451322}
   - {fileID: 801236043349204505}
+  - {fileID: 70529336658864155}
