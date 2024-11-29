@@ -33,5 +33,6 @@ public class EnterDoor : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         GameManager.instance.player.transform.position = appearPos.position;
+        GameManager.instance.player.transform.rotation = appearPos.rotation;
     }
 }

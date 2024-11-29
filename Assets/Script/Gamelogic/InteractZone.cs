@@ -12,6 +12,9 @@ public class InteractZone : MonoBehaviour
     private InputActionReference interactInput;
     //Setting
     public Action interactAction;
+    public string key;
+    //Data
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,15 +25,31 @@ public class InteractZone : MonoBehaviour
     {
         if(canvas.activeSelf)
         {
-            if (interactInput.action.WasPressedThisFrame())
+            if(key.Length == 0)
             {
-                if (interactAction != null)
+                if (interactInput.action.WasPressedThisFrame())
                 {
-                    interactAction.Invoke();
+                    if (interactAction != null)
+                    {
+                        interactAction.Invoke();
+                    }
+                    else
+                    {
+                        print("Interacted with no action");
+                    }
                 }
-                else
+            } else
+            {
+                if (interactInput.action.WasPressedThisFrame() && GameManager.instance.keys.Contains(key))
                 {
-                    print("Interacted with no action");
+                    if (interactAction != null)
+                    {
+                        interactAction.Invoke();
+                    }
+                    else
+                    {
+                        print("Interacted with no action");
+                    }
                 }
             }
         }
