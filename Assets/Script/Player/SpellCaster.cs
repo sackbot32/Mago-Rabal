@@ -49,7 +49,12 @@ public class SpellCaster : MonoBehaviour
     void Start()
     {
         DOTween.Init();
-        spellSelector = GetComponent<SpellSelector>();
+        if(GameManager.instance.player == null)
+        {
+            GameManager.instance.player = gameObject;
+        }
+        spellSelector = GameManager.instance.spellSelector;
+        spellSelector.spellCaster = this;
         ChangeSpell(spellSelector.spellSlots[0].spells[0]);
     }
 
