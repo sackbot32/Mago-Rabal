@@ -1,38 +1,39 @@
-
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Animations;
 
-public class FireballEnemy : MonoBehaviour, IEnemyAI
+public class GymBroIA : MonoBehaviour, IEnemyAI
 {
     //Components
     private StateMachine brain;
     private NavMeshAgent agent;
     [SerializeField]
     private Transform aim;
-    [SerializeField] 
+    [SerializeField]
     private ParentConstraint parentConstraint;
     [SerializeField]
     private Animator anim;
     [SerializeField]
     private ActionForAnimEvent animEvent;
+    [SerializeField]
+    private PhysicalAttack attack;
     //Settings
     public Transform patrolPointsParent;
+    public float timeBetweenAttacks;
     public float tooCloseToPlayer;
-    public float playerTooCloseToCover;
-    public Transform shootPoint;
-    public BaseSpellObject spellObject;
+    public float damage;
+    public float pushForce;
+    public List<string> tagsToHit;
     //Data
-    private List<Transform> coverPoints;
     private bool patrolling;
     private int currentPatrolPoint;
     public bool playerSeen;
     public GameObject player;
     private float distanceFromPlayer;
     private Vector3 lastPointSeen;
-    private Coroutine shootCoroutine;
+    private Coroutine attackCoroutine;
     private Vector3 previousPosition;
     private float curSpeed;
     void Start()
@@ -40,28 +41,28 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
         lastPointSeen = Vector3.zero;
         agent = GetComponent<NavMeshAgent>();
         brain = GetComponent<StateMachine>();
-        //aim = transform.GetChild(0).transform;
-        coverPoints = new List<Transform>();
-        if(patrolPointsParent == null && GameObject.FindGameObjectWithTag("PatrolParent") != null)
+        attack.damage = damage;
+        attack.pushForce = pushForce;
+        attack.tagToHit = tagsToHit;
+        if (patrolPointsParent == null && GameObject.FindGameObjectWithTag("PatrolParent") != null)
         {
             patrolPointsParent = GameObject.FindGameObjectWithTag("PatrolParent").transform;
         }
-        foreach (GameObject coverGM in GameObject.FindGameObjectsWithTag("Cover"))
+
+        if (animEvent != null)
         {
-            coverPoints.Add(coverGM.transform);
+            animEvent.actionList.Add(EnableAttackCollision);
+            animEvent.actionList.Add(DisableAttackCollision);
         }
-        if(animEvent != null)
-        {
-            animEvent.actionList.Add(ShootSpell);
-        }
-        brain.PushState(ExecutePatrol,EnterPatrol,ExitPatrol);
+        brain.PushState(ExecutePatrol, EnterPatrol, ExitPatrol);
     }
     private void Update()
     {
-        if(player != null && playerSeen)
+        if (player != null && playerSeen)
         {
             distanceFromPlayer = Vector3.Distance(player.transform.position, transform.position);
-        } else
+        }
+        else
         {
             //LookAtPlayer(false);
         }
@@ -74,15 +75,14 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
             Vector3 curMove = transform.position - previousPosition;
             curSpeed = curMove.magnitude / Time.deltaTime;
             previousPosition = transform.position;
-            print("currentSpeed: " + curSpeed);
-            anim.SetFloat("Speed",curSpeed);
+            anim.SetFloat("Speed", curSpeed);
         }
     }
 
     public void SetPlayer(GameObject newPlayer, bool detected)
     {
         playerSeen = detected;
-        if(detected)
+        if (detected)
         {
             player = newPlayer;
         }
@@ -97,14 +97,15 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     }
     private void LookAtPlayer(bool doIt)
     {
-        
+
         if (doIt && player != null)
         {
             aim.transform.forward = (player.transform.position - aim.transform.position).normalized;
             //aim.LookAt(player.transform.position);
             //aim.transform.localRotation = Quaternion.Euler(aim.rotation.eulerAngles.x, aim.rotation.eulerAngles.y, 0);
-        } else
-        { 
+        }
+        else
+        {
             aim.transform.localRotation = Quaternion.Euler(Vector3.zero);
         }
     }
@@ -112,16 +113,15 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
 
     private void EnterPatrol()
     {
-        print(gameObject.name + " is patrolling");
         patrolling = true;
         LookAtPlayer(false);
     }
 
     private void ExecutePatrol()
     {
-        if(playerSeen)
+        if (playerSeen)
         {
-            brain.PushState(ExectueCoverAttack,EnterCoverAttack,ExitCoverAttack);
+            brain.PushState(ExecuteAttack, EnterAttack, ExitAttack);
         }
     }
 
@@ -132,14 +132,14 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
 
     private void Patrol()
     {
-        if(agent.destination == null || !agent.pathPending)
+        if (agent.destination == null || !agent.pathPending)
         {
             agent.SetDestination(patrolPointsParent.GetChild(currentPatrolPoint).position);
         }
         if (agent.remainingDistance < 1f)
         {
             currentPatrolPoint += 1;
-            if(currentPatrolPoint >= patrolPointsParent.childCount)
+            if (currentPatrolPoint >= patrolPointsParent.childCount)
             {
                 currentPatrolPoint = 0;
             }
@@ -148,102 +148,72 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     }
 
     #endregion
-    #region GoToCoverAndAttack
-    private void EnterCoverAttack()
+    #region GoTottack
+    private void EnterAttack()
     {
         //if in group, send to group
-        ChooseCoverPoint();
-        if(player != null)
+        if (player != null)
         {
-            shootCoroutine = StartCoroutine(ShootProcess());
+
         }
-        
-        print("going to cover at " + agent.destination);
+
     }
 
-    private void ExectueCoverAttack()
+    private void ExecuteAttack()
     {
-        if(player != null)
+        if (player != null)
         {
             lastPointSeen = player.transform.position;
+            agent.SetDestination(player.transform.position);
             LookAtPlayer(true);
         }
         //if player too close, move to another cover
-        if(distanceFromPlayer < tooCloseToPlayer)
+        if (distanceFromPlayer <= tooCloseToPlayer)
         {
-            ChooseCoverPoint();
-        } 
+            if (attackCoroutine == null) 
+            {
+                attackCoroutine = StartCoroutine(AttackCourutine());
+            }
+        } else
+        {
+            if(attackCoroutine != null)
+            {
+                StopCoroutine(attackCoroutine);
+                attackCoroutine = null;
+            }
+        }
         if (!playerSeen)
         {
 
-            brain.PushState(ExecuteCheck,EnterCheck,ExitCheck);
+            brain.PushState(ExecuteCheck, EnterCheck, ExitCheck);
         }
     }
 
-    private void ExitCoverAttack()
+    private void ExitAttack()
     {
-        StopCoroutine(shootCoroutine);
         LookAtPlayer(false);
     }
 
-    private void ChooseCoverPoint()
-    {
-        int chosenCoverPoint = 0;
-        float closestDistance = float.MaxValue;
-        float distance = 0;
-        float distanceToPlayer = 0;
-        foreach (Transform coverPoint in coverPoints)
-        {
-            distanceToPlayer = Vector3.Distance(coverPoint.position, player.transform.position);
-            if (distanceToPlayer > playerTooCloseToCover)
-            {
-                distance = Vector3.Distance(coverPoint.position, transform.position);
-                if(distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    chosenCoverPoint = coverPoints.IndexOf(coverPoint);
-                }
-            }
-            else
-            {
-                print("Too close to player in index" + coverPoints.IndexOf(coverPoint));
-            }
-        }
-        agent.SetDestination(coverPoints[chosenCoverPoint].position);
-    }
-
-    private IEnumerator ShootProcess()
+    IEnumerator AttackCourutine()
     {
         while (true)
         {
-            if(distanceFromPlayer > tooCloseToPlayer)
-            {
-                if(player != null && playerSeen)
-                {
-                    if (this.enabled)
-                    {
-                        anim.Play("lanzarhechizo",1);
-                    } else
-                    {
-                        break;
-                    }
-                }
-                yield return new WaitForSeconds(spellObject.rate);
-            } else
-            {
-                yield return null;
-            }
+            anim.Play("pegargymbro", 1);
+            yield return new WaitForSeconds(timeBetweenAttacks);
         }
     }
 
-    private void ShootSpell()
+    public void EnableAttackCollision()
     {
-        GameObject newProyectile = Instantiate(spellObject.spellProyectile, shootPoint.position, shootPoint.rotation);
-        Vector3 shootDir = player.transform.position - shootPoint.position;
-        newProyectile.GetComponent<Rigidbody>().linearVelocity = shootDir.normalized * spellObject.proyectileSpeed;
-        newProyectile.GetComponent<SpellProyectile>().SetProyectileSettings(SpellManager.ReturnSpell(spellObject.spellType).Hit, spellObject.atributes,
-        spellObject.tagProyectileDetects, spellObject.spellProyectileName, spellObject.proyectileHitParticle);
+        attack.boxCollider.enabled = true;
     }
+
+    public void DisableAttackCollision()
+    {
+        attack.boxCollider.enabled = false;
+    }
+
+
     #endregion
     #region CheckPlayerLastPos
     private void EnterCheck()
@@ -259,9 +229,10 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
         if (playerSeen)
         {
             brain.PopState();
-        } else
+        }
+        else
         {
-            if(agent.remainingDistance < 1f)
+            if (agent.remainingDistance < 1f)
             {
                 brain.PopState();
                 brain.PopState();
@@ -270,9 +241,9 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     }
     private void ExitCheck()
     {
-        
+
     }
 
-    
+
     #endregion
 }

@@ -8,7 +8,7 @@ public class ActionForAnimEvent : MonoBehaviour
 
     public List<Action> actionList;
 
-    private void Start()
+    private void Awake()
     {
         actionList = new List<Action>();
     }
