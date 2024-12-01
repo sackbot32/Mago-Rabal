@@ -237,7 +237,13 @@ public class ThunderEnemy : MonoBehaviour, IEnemyAI
 
     private void SummonThunder()
     {
-        Instantiate(thunder, player.transform.position, Quaternion.identity);
+        if(thunder != null)
+        {
+            Instantiate(thunder, player.transform.position, Quaternion.identity);
+        } else
+        {
+            print("No thunder but tried to");
+        }
     }
 
     #endregion
