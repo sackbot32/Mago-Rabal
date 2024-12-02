@@ -31,6 +31,13 @@ MonoBehaviour:
     value: 2
   - name: TimeTillPush
     value: 6
-  castParticle: {fileID: 0}
-  proyectileHitParticle: {fileID: 0}
-  timeSinceLastCast: 7.649358
+  - name: HitPosX
+    value: -21.37349
+  - name: HitPosY
+    value: 1.4027975
+  - name: HitPosZ
+    value: -24.66972
+  castParticle: {fileID: 100014, guid: 27d7dcefc9cca9248a4e5bff86cdc8ef, type: 3}
+  proyectileHitParticle: {fileID: 100006, guid: f8fe7b9d0eb12704184b04bc4e8f5e17,
+    type: 3}
+  timeSinceLastCast: 4.573111
