@@ -925,11 +925,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GymBroEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 945069110874620801, guid: e6e9d52d8120a8c4282f466f4fccd9ed,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6055004530347816474, guid: e6e9d52d8120a8c4282f466f4fccd9ed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -979,11 +974,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6438489924546199086, guid: e6e9d52d8120a8c4282f466f4fccd9ed,
-        type: 3}
-      propertyPath: tooCloseToPlayer
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

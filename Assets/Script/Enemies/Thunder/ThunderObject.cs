@@ -7,7 +7,9 @@ public class ThunderObject : MonoBehaviour
     public string hitTag;
     public float colliderWaitTillOn;
     public float colliderWaitTillOff;
+    public GameObject thunderParticle;
     public float damage;
+    public float speed;
     private bool playerHit;
     private bool follow;
     private Transform player;
@@ -36,7 +38,7 @@ public class ThunderObject : MonoBehaviour
         {
             if(follow)
             {
-                transform.position = player.transform.position;
+                transform.position = Vector3.Lerp(transform.position, player.transform.position, Time.deltaTime * speed);
             }
         }
     }
@@ -47,6 +49,7 @@ public class ThunderObject : MonoBehaviour
         yield return new WaitForSeconds(colliderWaitTillOn);
         follow = false;
         yield return new WaitForSeconds(colliderWaitTillOn/2f);
+        Instantiate(thunderParticle,transform.position, Quaternion.identity);
         hitBox.enabled = true;
         yield return new WaitForSeconds(colliderWaitTillOff);
         Destroy(gameObject);
