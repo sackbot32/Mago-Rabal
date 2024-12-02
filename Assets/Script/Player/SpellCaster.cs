@@ -80,6 +80,12 @@ public class SpellCaster : MonoBehaviour
             currentSpellObject.timeSinceLastCast = 0;
             armAnim.Play("lanzar", -1, 0);
             armAnim.SetBool("AutomaticShooting", false);
+            if (castParticle != null)
+            {
+                GameObject casticle = Instantiate(castParticle, castSourcePoint.position + (castSourcePoint.forward).normalized * 0.2f, Quaternion.identity);
+                casticle.transform.forward = castSourcePoint.forward;
+                casticle.transform.parent = castSourcePoint;
+            }
             CastProyectile();
         }
         if (detonateInput.action.WasPressedThisFrame())
@@ -102,6 +108,12 @@ public class SpellCaster : MonoBehaviour
         if (castLaunchInput.action.IsPressed() && currentSpellObject.timeSinceLastCast >= rate)
         {
             //TODO cast launch animation and particles
+            if(castParticle != null)
+            {
+                GameObject casticle = Instantiate(castParticle, castSourcePoint.position + (castSourcePoint.forward).normalized * 0f, Quaternion.identity);
+                casticle.transform.forward = castSourcePoint.forward;
+                casticle.transform.parent = castSourcePoint;
+            }
             currentSpellObject.timeSinceLastCast = 0;
             armAnim.SetBool("AutomaticShooting", true);
             CastProyectile();
@@ -131,6 +143,8 @@ public class SpellCaster : MonoBehaviour
         spellProyectileName = newSpellObject.spellProyectileName;
         proyectileSpeed = newSpellObject.proyectileSpeed;
         rate = newSpellObject.rate;
+        castParticle = newSpellObject.castParticle;
+        proyectileHitParticle = newSpellObject.proyectileHitParticle;
         isAutomatic = newSpellObject.isAutomatic;
         tagProyectileDetects = newSpellObject.tagProyectileDetects;
         currentAtributes = newSpellObject.atributes;

@@ -33,11 +33,12 @@ MonoBehaviour:
   - name: CanBlow
     value: 1
   - name: HitPosX
-    value: -8.632933
+    value: 10.72278
   - name: HitPosY
-    value: 0.8436144
+    value: 1.0760865
   - name: HitPosZ
-    value: -1.6967545
-  castParticle: {fileID: 0}
-  proyectileHitParticle: {fileID: 0}
-  timeSinceLastCast: 4.9361153
+    value: -11.841341
+  castParticle: {fileID: 100006, guid: bd5adf398b1a7b74bb3f2b938ce2866d, type: 3}
+  proyectileHitParticle: {fileID: 100006, guid: a909e5f99afd6934f939dace571a8d9f,
+    type: 3}
+  timeSinceLastCast: 2.1742804
