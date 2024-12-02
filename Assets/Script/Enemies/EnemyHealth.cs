@@ -6,8 +6,12 @@ public class EnemyHealth : MonoBehaviour, IHealth
     //Components
     [SerializeField]
     private Animator anim;
+    [SerializeField]
+    private GameObject deathParticle;
+    
     //Settings
     public float maxHealth;
+
     //Data
     [SerializeField]
     private float currentHealth;
@@ -53,6 +57,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         }
         anim.Play("magomuerte");
         yield return new WaitForSeconds(2f);
+        Instantiate(deathParticle,transform.position,Quaternion.identity);
         Destroy(gameObject);
 
     }

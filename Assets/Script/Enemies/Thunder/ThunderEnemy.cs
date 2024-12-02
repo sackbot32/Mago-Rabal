@@ -1,30 +1,33 @@
-
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Animations;
-using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.Rendering;
 
-public class FireballEnemy : MonoBehaviour, IEnemyAI
+public class ThunderEnemy : MonoBehaviour, IEnemyAI
 {
     //Components
     private StateMachine brain;
     private NavMeshAgent agent;
     [SerializeField]
     private Transform aim;
-    [SerializeField] 
+    [SerializeField]
     private ParentConstraint parentConstraint;
     [SerializeField]
     private Animator anim;
     [SerializeField]
     private ActionForAnimEvent animEvent;
+    public GameObject thunder;
     //Settings
     public Transform patrolPointsParent;
     public float tooCloseToPlayer;
     public float playerTooCloseToCover;
-    public Transform shootPoint;
-    public BaseSpellObject spellObject;
+    public float timeBetweenAttacks;
+    public string hitTag;
+    public float waitTillOn;
+    public float waitTillOff;
+    public float damage;
     public float feetDistanceDetect;
     //Data
     private List<Transform> coverPoints;
@@ -33,7 +36,6 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     public bool playerSeen;
     public GameObject player;
     private float distanceFromPlayer;
-    private Vector3 lastPointSeen;
     private Coroutine shootCoroutine;
     private Vector3 previousPosition;
     private float curSpeed;
@@ -42,12 +44,11 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     void Start()
     {
         layer = LayerMask.GetMask("Ground");
-        lastPointSeen = Vector3.zero;
         agent = GetComponent<NavMeshAgent>();
         brain = GetComponent<StateMachine>();
         //aim = transform.GetChild(0).transform;
         coverPoints = new List<Transform>();
-        if(patrolPointsParent == null && GameObject.FindGameObjectWithTag("PatrolParent") != null)
+        if (patrolPointsParent == null && GameObject.FindGameObjectWithTag("PatrolParent") != null)
         {
             patrolPointsParent = GameObject.FindGameObjectWithTag("PatrolParent").transform;
         }
@@ -55,18 +56,19 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
         {
             coverPoints.Add(coverGM.transform);
         }
-        if(animEvent != null)
+        if (animEvent != null)
         {
-            animEvent.actionList.Add(ShootSpell);
+            animEvent.actionList.Add(SummonThunder);
         }
-        brain.PushState(ExecutePatrol,EnterPatrol,ExitPatrol);
+        brain.PushState(ExecutePatrol, EnterPatrol, ExitPatrol);
     }
     private void Update()
     {
-        if(player != null && playerSeen)
+        if (player != null && playerSeen)
         {
             distanceFromPlayer = Vector3.Distance(player.transform.position, transform.position);
-        } else
+        }
+        else
         {
             //LookAtPlayer(false);
         }
@@ -79,17 +81,17 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
             Vector3 curMove = transform.position - previousPosition;
             curSpeed = curMove.magnitude / Time.deltaTime;
             previousPosition = transform.position;
-            print("currentSpeed: " + curSpeed);
-            anim.SetFloat("Speed",curSpeed);
+            anim.SetFloat("Speed", curSpeed);
         }
+
         if (!onGround)
         {
-            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, feetDistanceDetect, layer))
+            Debug.DrawRay(transform.position, -transform.up * feetDistanceDetect, Color.blue);
+            if (Physics.Raycast(transform.position,-transform.up, out RaycastHit hit,feetDistanceDetect,layer))
             {
-                Debug.DrawRay(transform.position, -transform.up * feetDistanceDetect, Color.red);
                 onGround = true;
                 agent.enabled = true;
-                if(player != null)
+                if (player != null)
                 {
                     ChooseCoverPoint();
                 }
@@ -102,12 +104,16 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
         agent.enabled = false;
         onGround = false;
     }
+
     public void SetPlayer(GameObject newPlayer, bool detected)
     {
-        playerSeen = detected;
-        if(detected)
+        if(player == null)
         {
-            player = newPlayer;
+            playerSeen = detected;
+            if (detected)
+            {
+                player = newPlayer;
+            }
         }
     }
 
@@ -120,14 +126,15 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     }
     private void LookAtPlayer(bool doIt)
     {
-        
+
         if (doIt && player != null)
         {
             aim.transform.forward = (player.transform.position - aim.transform.position).normalized;
             //aim.LookAt(player.transform.position);
             //aim.transform.localRotation = Quaternion.Euler(aim.rotation.eulerAngles.x, aim.rotation.eulerAngles.y, 0);
-        } else
-        { 
+        }
+        else
+        {
             aim.transform.localRotation = Quaternion.Euler(Vector3.zero);
         }
     }
@@ -142,9 +149,9 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
 
     private void ExecutePatrol()
     {
-        if(playerSeen)
+        if (playerSeen)
         {
-            brain.PushState(ExectueCoverAttack,EnterCoverAttack,ExitCoverAttack);
+            brain.PushState(ExectueCoverAttack, EnterCoverAttack, ExitCoverAttack);
         }
     }
 
@@ -155,14 +162,14 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
 
     private void Patrol()
     {
-        if(agent.destination == null || !agent.pathPending)
+        if (agent.destination == null || !agent.pathPending)
         {
             agent.SetDestination(patrolPointsParent.GetChild(currentPatrolPoint).position);
         }
         if (agent.remainingDistance < 1f)
         {
             currentPatrolPoint += 1;
-            if(currentPatrolPoint >= patrolPointsParent.childCount)
+            if (currentPatrolPoint >= patrolPointsParent.childCount)
             {
                 currentPatrolPoint = 0;
             }
@@ -176,30 +183,24 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     {
         //if in group, send to group
         ChooseCoverPoint();
-        if(player != null)
+        if (player != null)
         {
-            shootCoroutine = StartCoroutine(ShootProcess());
+            shootCoroutine = StartCoroutine(ThunderAttack());
         }
-        
+
         print("going to cover at " + agent.destination);
     }
 
     private void ExectueCoverAttack()
     {
-        if(player != null)
+        if (player != null)
         {
-            lastPointSeen = player.transform.position;
             LookAtPlayer(true);
         }
         //if player too close, move to another cover
-        if(distanceFromPlayer < tooCloseToPlayer)
+        if (distanceFromPlayer < tooCloseToPlayer)
         {
             ChooseCoverPoint();
-        } 
-        if (!playerSeen)
-        {
-
-            brain.PushState(ExecuteCheck,EnterCheck,ExitCheck);
         }
     }
 
@@ -212,7 +213,7 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     private void ChooseCoverPoint()
     {
         int chosenCoverPoint = 0;
-        float closestDistance = float.MaxValue;
+        float furthestCover = 0;
         float distance = 0;
         float distanceToPlayer = 0;
         foreach (Transform coverPoint in coverPoints)
@@ -221,9 +222,9 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
             if (distanceToPlayer > playerTooCloseToCover)
             {
                 distance = Vector3.Distance(coverPoint.position, transform.position);
-                if(distance < closestDistance)
+                if (distance > furthestCover)
                 {
-                    closestDistance = distance;
+                    furthestCover = distance;
                     chosenCoverPoint = coverPoints.IndexOf(coverPoint);
                 }
             }
@@ -235,67 +236,42 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
         agent.SetDestination(coverPoints[chosenCoverPoint].position);
     }
 
-    private IEnumerator ShootProcess()
+    private IEnumerator ThunderAttack()
     {
         while (true)
         {
-            if(distanceFromPlayer > tooCloseToPlayer)
+            if (distanceFromPlayer > tooCloseToPlayer)
             {
-                if(player != null && playerSeen)
+                if (player != null && playerSeen)
                 {
                     if (this.enabled)
                     {
-                        anim.Play("lanzarhechizo",1);
-                    } else
+                        anim.Play("invocar", 1);
+                    }
+                    else
                     {
                         break;
                     }
                 }
-                yield return new WaitForSeconds(spellObject.rate);
-            } else
+                yield return new WaitForSeconds(timeBetweenAttacks);
+            }
+            else
             {
                 yield return null;
             }
         }
     }
 
-    private void ShootSpell()
+    private void SummonThunder()
     {
-        GameObject newProyectile = Instantiate(spellObject.spellProyectile, shootPoint.position, shootPoint.rotation);
-        Vector3 shootDir = player.transform.position - shootPoint.position;
-        newProyectile.GetComponent<Rigidbody>().linearVelocity = shootDir.normalized * spellObject.proyectileSpeed;
-        newProyectile.GetComponent<SpellProyectile>().SetProyectileSettings(SpellManager.ReturnSpell(spellObject.spellType).Hit, spellObject.atributes,
-        spellObject.tagProyectileDetects, spellObject.spellProyectileName, spellObject.proyectileHitParticle);
-    }
-    #endregion
-    #region CheckPlayerLastPos
-    private void EnterCheck()
-    {
-        print("checking for player at " + lastPointSeen);
-        LookAtPlayer(false);
-        agent.SetDestination(lastPointSeen);
-    }
-
-    private void ExecuteCheck()
-    {
-
-        if (playerSeen)
+        if(thunder != null)
         {
-            brain.PopState();
+            Instantiate(thunder, player.transform.position, Quaternion.identity).GetComponent<ThunderObject>().SettingSetter(hitTag,waitTillOn,waitTillOff,damage,player.transform);
         } else
         {
-            if(agent.remainingDistance < 1f)
-            {
-                brain.PopState();
-                brain.PopState();
-            }
+            print("No thunder but tried to");
         }
     }
-    private void ExitCheck()
-    {
-        
-    }
 
-    
     #endregion
 }
