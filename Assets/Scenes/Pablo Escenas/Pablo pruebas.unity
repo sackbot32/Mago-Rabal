@@ -925,6 +925,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GymBroEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4224876857123861513, guid: e6e9d52d8120a8c4282f466f4fccd9ed,
+        type: 3}
+      propertyPath: deathParticle
+      value: 
+      objectReference: {fileID: 100008, guid: cbf83cbf75cdb874c9333de4ab55b690, type: 3}
     - target: {fileID: 6055004530347816474, guid: e6e9d52d8120a8c4282f466f4fccd9ed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1418,6 +1423,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1170114603826040159, guid: 01b8caa68bda65d4cb7d429a129f9197,
+        type: 3}
+      propertyPath: deathParticle
+      value: 
+      objectReference: {fileID: 100008, guid: cbf83cbf75cdb874c9333de4ab55b690, type: 3}
     - target: {fileID: 1375128211947518506, guid: 01b8caa68bda65d4cb7d429a129f9197,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2103,6 +2113,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6670611717268837193, guid: ee6047f45a206e44e9496359ab02e0e3,
+        type: 3}
+      propertyPath: deathParticle
+      value: 
+      objectReference: {fileID: 100008, guid: cbf83cbf75cdb874c9333de4ab55b690, type: 3}
     - target: {fileID: 7908967805275602607, guid: ee6047f45a206e44e9496359ab02e0e3,
         type: 3}
       propertyPath: m_Name
