@@ -72,7 +72,7 @@ public class SpellProyectile : MonoBehaviour
             onHitAction.Invoke(other.gameObject,currentAtributes);
             if(hitParticle != null)
             {
-                Instantiate(hitParticle);
+                Instantiate(hitParticle, transform.position, Quaternion.identity);
             }
             Destroy(gameObject);
         }
@@ -81,7 +81,7 @@ public class SpellProyectile : MonoBehaviour
         {
             if (hitParticle != null)
             {
-                Instantiate(hitParticle);
+                Instantiate(hitParticle,transform.position,Quaternion.identity);
             }
             Destroy(gameObject);
         }

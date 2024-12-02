@@ -29,6 +29,13 @@ MonoBehaviour:
     value: 5
   - name: TimeBetween
     value: 0.1
-  castParticle: {fileID: 0}
-  proyectileHitParticle: {fileID: 0}
-  timeSinceLastCast: 2.5397732
+  - name: HitPosX
+    value: -5.1898518
+  - name: HitPosY
+    value: 1.1971803
+  - name: HitPosZ
+    value: 1.91299
+  castParticle: {fileID: 100008, guid: 538596e9c1bdfb04c9014d0b92d71df4, type: 3}
+  proyectileHitParticle: {fileID: 100006, guid: cd7726bf1d6190c4aa8337b874abe2d0,
+    type: 3}
+  timeSinceLastCast: 1.2010324
