@@ -56,6 +56,14 @@ public class MagicalImpulse : SpellBase
         Vector3 impulseDir = targetPoint - hitObj.transform.position;
         SpellDictionary.instance.spellGameObjectDict.TryGetValue("PushParticle",out pushParticlePrefab);
         GameObject.Instantiate(pushParticlePrefab, hitObj.transform.position, Quaternion.identity).transform.up = impulseDir;
+        if(hitObj.TryGetComponent(out IEnemyAI enemyAI))
+        {
+            enemyAI.ImpulseEffect();
+        } else
+        {
+            Debug.Log("Has no IA");
+        }
+
         hitObj.GetComponent<Rigidbody>()?.AddForce(impulseDir.normalized * trueEnemyPush);
         hitObj.GetComponent<SpellEffects>().corroutineNames.Remove(impulseEffectKey);
 

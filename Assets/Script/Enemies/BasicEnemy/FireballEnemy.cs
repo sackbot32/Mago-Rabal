@@ -4,6 +4,7 @@ using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Animations;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class FireballEnemy : MonoBehaviour, IEnemyAI
 {
@@ -24,6 +25,7 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     public float playerTooCloseToCover;
     public Transform shootPoint;
     public BaseSpellObject spellObject;
+    public float feetDistanceDetect;
     //Data
     private List<Transform> coverPoints;
     private bool patrolling;
@@ -35,8 +37,11 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     private Coroutine shootCoroutine;
     private Vector3 previousPosition;
     private float curSpeed;
+    private bool onGround;
+    private LayerMask layer;
     void Start()
     {
+        layer = LayerMask.GetMask("Ground");
         lastPointSeen = Vector3.zero;
         agent = GetComponent<NavMeshAgent>();
         brain = GetComponent<StateMachine>();
@@ -77,8 +82,26 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
             print("currentSpeed: " + curSpeed);
             anim.SetFloat("Speed",curSpeed);
         }
+        if (!onGround)
+        {
+            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, feetDistanceDetect, layer))
+            {
+                Debug.DrawRay(transform.position, -transform.up * feetDistanceDetect, Color.red);
+                onGround = true;
+                agent.enabled = true;
+                if(player != null)
+                {
+                    ChooseCoverPoint();
+                }
+            }
+        }
     }
 
+    public void ImpulseEffect()
+    {
+        agent.enabled = false;
+        onGround = false;
+    }
     public void SetPlayer(GameObject newPlayer, bool detected)
     {
         playerSeen = detected;

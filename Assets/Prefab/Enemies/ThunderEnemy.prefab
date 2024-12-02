@@ -571,11 +571,16 @@ MonoBehaviour:
   parentConstraint: {fileID: 2038116127456216613}
   anim: {fileID: 5176639935511393087}
   animEvent: {fileID: 8710643464366572733}
-  thunder: {fileID: 0}
+  thunder: {fileID: 8131810121806405025, guid: 2f18451c822f50b478d0d4cdb67f970e, type: 3}
   patrolPointsParent: {fileID: 0}
   tooCloseToPlayer: 3
   playerTooCloseToCover: 5
   timeBetweenAttacks: 1
+  hitTag: Player
+  waitTillOn: 0.5
+  waitTillOff: 0.1
+  damage: 10
+  feetDistanceDetect: 0.7
   playerSeen: 0
   player: {fileID: 0}
 --- !u!1001 &5596355700517980471

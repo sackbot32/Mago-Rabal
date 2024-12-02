@@ -24,6 +24,11 @@ public class ThunderEnemy : MonoBehaviour, IEnemyAI
     public float tooCloseToPlayer;
     public float playerTooCloseToCover;
     public float timeBetweenAttacks;
+    public string hitTag;
+    public float waitTillOn;
+    public float waitTillOff;
+    public float damage;
+    public float feetDistanceDetect;
     //Data
     private List<Transform> coverPoints;
     private bool patrolling;
@@ -34,8 +39,11 @@ public class ThunderEnemy : MonoBehaviour, IEnemyAI
     private Coroutine shootCoroutine;
     private Vector3 previousPosition;
     private float curSpeed;
+    private bool onGround;
+    private LayerMask layer;
     void Start()
     {
+        layer = LayerMask.GetMask("Ground");
         agent = GetComponent<NavMeshAgent>();
         brain = GetComponent<StateMachine>();
         //aim = transform.GetChild(0).transform;
@@ -73,9 +81,28 @@ public class ThunderEnemy : MonoBehaviour, IEnemyAI
             Vector3 curMove = transform.position - previousPosition;
             curSpeed = curMove.magnitude / Time.deltaTime;
             previousPosition = transform.position;
-            print("currentSpeed: " + curSpeed);
             anim.SetFloat("Speed", curSpeed);
         }
+
+        if (!onGround)
+        {
+            Debug.DrawRay(transform.position, -transform.up * feetDistanceDetect, Color.blue);
+            if (Physics.Raycast(transform.position,-transform.up, out RaycastHit hit,feetDistanceDetect,layer))
+            {
+                onGround = true;
+                agent.enabled = true;
+                if (player != null)
+                {
+                    ChooseCoverPoint();
+                }
+            }
+        }
+    }
+
+    public void ImpulseEffect()
+    {
+        agent.enabled = false;
+        onGround = false;
     }
 
     public void SetPlayer(GameObject newPlayer, bool detected)
@@ -239,7 +266,7 @@ public class ThunderEnemy : MonoBehaviour, IEnemyAI
     {
         if(thunder != null)
         {
-            Instantiate(thunder, player.transform.position, Quaternion.identity);
+            Instantiate(thunder, player.transform.position, Quaternion.identity).GetComponent<ThunderObject>().SettingSetter(hitTag,waitTillOn,waitTillOff,damage,player.transform);
         } else
         {
             print("No thunder but tried to");

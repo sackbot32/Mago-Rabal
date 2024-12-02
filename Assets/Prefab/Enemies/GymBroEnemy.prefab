@@ -338,11 +338,12 @@ MonoBehaviour:
   attack: {fileID: 1387616538661269946}
   patrolPointsParent: {fileID: 0}
   timeBetweenAttacks: 1
-  tooCloseToPlayer: 3
+  tooCloseToPlayer: 4
   damage: 10
   pushForce: 5000
   tagsToHit:
   - Player
+  feetDistanceDetect: 0.7
   playerSeen: 0
   player: {fileID: 0}
 --- !u!1 &3905386910192684497

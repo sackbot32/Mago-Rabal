@@ -5,4 +5,6 @@ public interface IEnemyAI
     public void SetPlayer(GameObject newPlayer, bool detected);
 
     public void TurnOff();
+
+    public void ImpulseEffect();
 }

@@ -3,6 +3,7 @@ using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Animations;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GymBroIA : MonoBehaviour, IEnemyAI
 {
@@ -26,6 +27,7 @@ public class GymBroIA : MonoBehaviour, IEnemyAI
     public float damage;
     public float pushForce;
     public List<string> tagsToHit;
+    public float feetDistanceDetect;
     //Data
     private bool patrolling;
     private int currentPatrolPoint;
@@ -36,8 +38,11 @@ public class GymBroIA : MonoBehaviour, IEnemyAI
     private Coroutine attackCoroutine;
     private Vector3 previousPosition;
     private float curSpeed;
+    private bool onGround;
+    private LayerMask layer;
     void Start()
     {
+        layer = LayerMask.GetMask("Ground");
         lastPointSeen = Vector3.zero;
         agent = GetComponent<NavMeshAgent>();
         brain = GetComponent<StateMachine>();
@@ -77,6 +82,21 @@ public class GymBroIA : MonoBehaviour, IEnemyAI
             previousPosition = transform.position;
             anim.SetFloat("Speed", curSpeed);
         }
+        if (!onGround)
+        {
+            Debug.DrawRay(transform.position, -transform.up * feetDistanceDetect, Color.green);
+            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, feetDistanceDetect, layer))
+            {
+                onGround = true;
+                agent.enabled = true;
+            }
+        }
+    }
+
+    public void ImpulseEffect()
+    {
+        agent.enabled = false;
+        onGround = false;
     }
 
     public void SetPlayer(GameObject newPlayer, bool detected)
@@ -164,7 +184,10 @@ public class GymBroIA : MonoBehaviour, IEnemyAI
         if (player != null)
         {
             lastPointSeen = player.transform.position;
-            agent.SetDestination(player.transform.position);
+            if (agent.enabled)
+            {
+                agent.SetDestination(player.transform.position);
+            }
             LookAtPlayer(true);
         }
         //if player too close, move to another cover
@@ -220,7 +243,10 @@ public class GymBroIA : MonoBehaviour, IEnemyAI
     {
         print("checking for player at " + lastPointSeen);
         LookAtPlayer(false);
-        agent.SetDestination(lastPointSeen);
+        if (agent.enabled)
+        {
+            agent.SetDestination(lastPointSeen);
+        }
     }
 
     private void ExecuteCheck()
@@ -232,10 +258,13 @@ public class GymBroIA : MonoBehaviour, IEnemyAI
         }
         else
         {
-            if (agent.remainingDistance < 1f)
+            if (agent.enabled)
             {
-                brain.PopState();
-                brain.PopState();
+                if (agent.remainingDistance < 1f)
+                {
+                    brain.PopState();
+                    brain.PopState();
+                }
             }
         }
     }

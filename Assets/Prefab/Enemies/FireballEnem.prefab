@@ -489,6 +489,7 @@ MonoBehaviour:
   playerTooCloseToCover: 3
   shootPoint: {fileID: 2623281877984567609}
   spellObject: {fileID: 11400000, guid: 21af5abfe61be9f4299597b8b1da3d85, type: 2}
+  feetDistanceDetect: 0.7
   playerSeen: 0
   player: {fileID: 0}
 --- !u!1 &6829543094178876824
