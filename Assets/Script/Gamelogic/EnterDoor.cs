@@ -23,7 +23,7 @@ public class EnterDoor : MonoBehaviour
     public void ChangeRoom()
     {
         GameManager.instance.currentDoorObject = doorTarget;
-        SceneManager.LoadScene(doorTarget.sceneIndex);
+        GameManager.instance.StartLoadingScene(doorTarget.sceneIndex);
     }
 
     private IEnumerator PutPlayerInPos()
@@ -32,6 +32,7 @@ public class EnterDoor : MonoBehaviour
         {
             yield return new WaitForSeconds(0.01f);
         }
+        GameManager.instance.FinishLoading();
         GameManager.instance.player.transform.position = appearPos.position;
         GameManager.instance.player.transform.rotation = appearPos.rotation;
     }
