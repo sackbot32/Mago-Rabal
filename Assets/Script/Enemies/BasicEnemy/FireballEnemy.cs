@@ -79,7 +79,6 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
             Vector3 curMove = transform.position - previousPosition;
             curSpeed = curMove.magnitude / Time.deltaTime;
             previousPosition = transform.position;
-            print("currentSpeed: " + curSpeed);
             anim.SetFloat("Speed",curSpeed);
         }
         if (!onGround)
@@ -205,7 +204,10 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
 
     private void ExitCoverAttack()
     {
-        StopCoroutine(shootCoroutine);
+        if(shootCoroutine != null)
+        {
+            StopCoroutine(shootCoroutine);
+        }
         LookAtPlayer(false);
     }
 
@@ -232,7 +234,10 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
                 print("Too close to player in index" + coverPoints.IndexOf(coverPoint));
             }
         }
-        agent.SetDestination(coverPoints[chosenCoverPoint].position);
+        if (agent.enabled)
+        {
+            agent.SetDestination(coverPoints[chosenCoverPoint].position);
+        }
     }
 
     private IEnumerator ShootProcess()
@@ -273,7 +278,10 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     {
         print("checking for player at " + lastPointSeen);
         LookAtPlayer(false);
-        agent.SetDestination(lastPointSeen);
+        if (agent.enabled)
+        {
+            agent.SetDestination(lastPointSeen);
+        }
     }
 
     private void ExecuteCheck()
@@ -284,10 +292,13 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
             brain.PopState();
         } else
         {
-            if(agent.remainingDistance < 1f)
+            if(agent.enabled)
             {
-                brain.PopState();
-                brain.PopState();
+                if(agent.remainingDistance < 1f)
+                {
+                    brain.PopState();
+                    brain.PopState();
+                }
             }
         }
     }

@@ -79,9 +79,9 @@ MonoBehaviour:
   - spells:
     - {fileID: 11400000, guid: 7800b64cb545fc142832c91732ffa43d, type: 2}
   - spells:
-    - {fileID: 11400000, guid: bf7ca44aee07ff1408bfbb7bd220dc99, type: 2}
+    - {fileID: 0}
   - spells:
-    - {fileID: 11400000, guid: e165b4ed252c0704d8e1d1ba88361683, type: 2}
+    - {fileID: 0}
   selectInput: {fileID: -944628639613478452, guid: 2dd9c78e2b3faf84d88fe384166a1d62,
     type: 3}
 --- !u!114 &2186340157686225375
@@ -99,3 +99,5 @@ MonoBehaviour:
   player: {fileID: 0}
   spellSelector: {fileID: 7397799251842071700}
   currentDoorObject: {fileID: 0}
+  keys: []
+  enemies: []

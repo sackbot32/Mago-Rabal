@@ -17,8 +17,8 @@ MonoBehaviour:
   spellSprite: {fileID: 21300000, guid: c5a6e6f7e28bbf14c82e2abf4993f1e1, type: 3}
   spellProyectileName: Fire
   proyectileSpeed: 20
-  rate: 0.1
-  isAutomatic: 1
+  rate: 0.25
+  isAutomatic: 0
   tagProyectileDetects:
   - Enemy
   spellType: 2
@@ -30,12 +30,12 @@ MonoBehaviour:
   - name: TimeBetween
     value: 0.1
   - name: HitPosX
-    value: -5.1898518
+    value: 58.586918
   - name: HitPosY
-    value: 1.1971803
+    value: 16.211988
   - name: HitPosZ
-    value: 1.91299
+    value: 45.395023
   castParticle: {fileID: 100008, guid: 538596e9c1bdfb04c9014d0b92d71df4, type: 3}
   proyectileHitParticle: {fileID: 100006, guid: cd7726bf1d6190c4aa8337b874abe2d0,
     type: 3}
-  timeSinceLastCast: 1.2010324
+  timeSinceLastCast: 3.638766

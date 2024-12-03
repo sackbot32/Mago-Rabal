@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 5528809675034871682}
+  deathParticle: {fileID: 100008, guid: cbf83cbf75cdb874c9333de4ab55b690, type: 3}
   maxHealth: 100
   currentHealth: 0
 --- !u!114 &4402001607550226244

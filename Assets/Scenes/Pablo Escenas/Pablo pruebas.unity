@@ -2288,6 +2288,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7397799251842071700, guid: 7c7bb81e913cebb459c31c1da8aa0a9a,
         type: 3}
+      propertyPath: 'spellSlots.Array.data[2].spells.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7397799251842071700, guid: 7c7bb81e913cebb459c31c1da8aa0a9a,
+        type: 3}
       propertyPath: 'spellSlots.Array.data[3].spells.Array.data[0]'
       value: 
       objectReference: {fileID: 0}

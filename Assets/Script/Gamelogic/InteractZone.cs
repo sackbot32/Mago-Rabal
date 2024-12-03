@@ -14,10 +14,13 @@ public class InteractZone : MonoBehaviour
     public Action interactAction;
     public string key;
     //Data
+    public Transform player;
+    private Vector3 dirToPlayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         canvas.SetActive(false);
     }
 
@@ -25,6 +28,9 @@ public class InteractZone : MonoBehaviour
     {
         if(canvas.activeSelf)
         {
+            dirToPlayer = (player.position - transform.position).normalized;
+            canvas.transform.right = -dirToPlayer;
+            canvas.transform.rotation = Quaternion.Euler(0, canvas.transform.rotation.eulerAngles.y, 0);
             if(key.Length == 0)
             {
                 if (interactInput.action.WasPressedThisFrame())

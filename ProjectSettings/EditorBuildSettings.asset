@@ -6,11 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Pablo Escenas/Pablo pruebas.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Escenas/MenuInicio.unity
+    guid: ec237b783dcc7734d95c7cfeba5a3501
   - enabled: 1
-    path: Assets/Scenes/Pablo Escenas/Pablo pruebas 1.unity
-    guid: 3ffee1b84c65aba48b602bd5dea18911
+    path: Assets/Scenes/Escenas/Benarrabal.unity
+    guid: 32f5474b75fa6414aaf380e374ccc130
+  - enabled: 1
+    path: Assets/Scenes/Escenas/Iglesia/Iglesia1.unity
+    guid: 2dab89f251ac9fc42b9f500eadab3d9c
+  - enabled: 1
+    path: Assets/Scenes/Escenas/Iglesia/Iglesia2.unity
+    guid: acf9f2092e62b7847b8d9e40bf0c40d7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2dd9c78e2b3faf84d88fe384166a1d62,
       type: 3}
