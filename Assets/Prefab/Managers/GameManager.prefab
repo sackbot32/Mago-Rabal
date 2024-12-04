@@ -257,7 +257,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4274815236147804461}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3517982996462177606}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: GoToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1250943864765741488
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,13 +282,14 @@ GameObject:
   - component: {fileID: 111486485603279014}
   - component: {fileID: 5668527320324724312}
   - component: {fileID: 7945067806499337901}
+  - component: {fileID: 3517982996462177606}
   m_Layer: 5
   m_Name: PauseCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &80938862466434563
 RectTransform:
   m_ObjectHideFlags: 0
@@ -360,6 +373,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3517982996462177606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250943864765741488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acea15b1fa3ef5b4ba728fec5a21fe14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseInput: {fileID: -1036617474169517030, guid: 2dd9c78e2b3faf84d88fe384166a1d62,
+    type: 3}
 --- !u!1 &2288067574094595109
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1236925317305839396
 RectTransform:
   m_ObjectHideFlags: 0
@@ -551,6 +578,7 @@ GameObject:
   - component: {fileID: 7256348360403291389}
   - component: {fileID: 3842130047321581266}
   - component: {fileID: 1327710306953116585}
+  - component: {fileID: 1021620672940508731}
   m_Layer: 0
   m_Name: LoseCanvas
   m_TagString: Untagged
@@ -644,6 +672,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1021620672940508731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2588640551024978546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559859d7750372746baa7e371e79890f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3078987795192566877
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +804,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8947231448324677111}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1021620672940508731}
+        m_TargetAssemblyTypeName: LoseButtons, Assembly-CSharp
+        m_MethodName: GoToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3441412948023488291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,7 +1700,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2842657327741800392}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3517982996462177606}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6432634795114622373
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,7 +2081,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7614267941511323357}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1021620672940508731}
+        m_TargetAssemblyTypeName: LoseButtons, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7398507997630891834
 GameObject:
   m_ObjectHideFlags: 0
