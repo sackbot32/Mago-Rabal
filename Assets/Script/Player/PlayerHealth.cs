@@ -62,6 +62,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
     }
     public void Death()
     {
-        print("Has muerto");
+        GameManager.instance.LoseScreen();
     }
 }

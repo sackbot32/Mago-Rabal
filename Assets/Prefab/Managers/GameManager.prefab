@@ -331,7 +331,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &5668527320324724312
 MonoBehaviour:
@@ -398,7 +398,6 @@ GameObject:
   - component: {fileID: 1236925317305839396}
   - component: {fileID: 6818675196488951211}
   - component: {fileID: 2242024434926682896}
-  - component: {fileID: 2130959275348070095}
   m_Layer: 0
   m_Name: LoadingCanvas
   m_TagString: Untagged
@@ -449,7 +448,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &2242024434926682896
 MonoBehaviour:
@@ -474,23 +473,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &2130959275348070095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2288067574094595109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &2404245708213675317
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +485,7 @@ GameObject:
   - component: {fileID: 636574575357632982}
   - component: {fileID: 3160277020992546969}
   m_Layer: 0
-  m_Name: Image
+  m_Name: WizardImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -630,7 +612,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &3842130047321581266
 MonoBehaviour:
@@ -1364,9 +1346,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1796709226371845813}
   - {fileID: 1236925317305839396}
   - {fileID: 80938862466434563}
+  - {fileID: 1796709226371845813}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1796214418611230170
@@ -1443,6 +1425,8 @@ MonoBehaviour:
   enemies: []
   background: {fileID: 8604678386029529328}
   rotateThing: {fileID: 4234144447310424140}
+  wizardImg: {fileID: 3160277020992546969}
+  loseScreen: {fileID: 2588640551024978546}
 --- !u!1 &5615245002034429819
 GameObject:
   m_ObjectHideFlags: 0
