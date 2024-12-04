@@ -21,6 +21,7 @@ public class PlayerControl : MonoBehaviour
     private Transform cam;
     private LayerMask layer;
     private Transform feet;
+    private Camera handCamera;
     //Settings
     [Header("Movement Settings")]
     public float addedSpeed;
@@ -60,6 +61,7 @@ public class PlayerControl : MonoBehaviour
     private bool canSprint;
     private void Start()
     {
+        handCamera = transform.GetChild(4).gameObject.GetComponent<Camera>();
         canSprint = true;
         sprinting = false;
         currentSprintValue = maxSprintValue;
@@ -190,6 +192,7 @@ public class PlayerControl : MonoBehaviour
 
         transform.Rotate(Vector3.up * horRot);
         cam.localRotation = Quaternion.Euler(verRot, 0f, 0f);
+        handCamera.transform.localRotation = Quaternion.Euler(verRot, 0f, 0f);
     }
 
     public bool DetectGround()
