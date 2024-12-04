@@ -19,12 +19,16 @@ public class GameManager : MonoBehaviour
     public List<string> enemies;
     public Image background;
     public Image rotateThing;
+    public Image wizardImg;
+    public GameObject loseScreen;
     private Coroutine corouSpin;
     void Awake()
     {
 
         if (instance == null)
         {
+            Time.timeScale = 1;
+            DOTween.defaultTimeScaleIndependent = false;
             FinishLoading();
             keys = new List<string>();
             enemies = new List<string>();
@@ -44,7 +48,10 @@ public class GameManager : MonoBehaviour
     {
         rotateThing.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
+        wizardImg.gameObject.SetActive(true);
         corouSpin = StartCoroutine(SpinLogo());
+
+        DOTween.To(() => wizardImg.color, x => wizardImg.color = x, new Color(1, 1, 1, 1), 0.15f);
         DOTween.To(() => rotateThing.color, x => rotateThing.color = x, new Color(1, 1, 1, 1), 0.15f);
         DOTween.To(() => background.color, x => background.color = x, new Color(0, 0, 0, 1), 0.25f);
     }
@@ -53,7 +60,9 @@ public class GameManager : MonoBehaviour
     {
         rotateThing.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
+        wizardImg.gameObject.SetActive(true);
         corouSpin = StartCoroutine(SpinLogo());
+        DOTween.To(() => wizardImg.color, x => wizardImg.color = x, new Color(1, 1, 1, 1), 0.15f);
         DOTween.To(() => rotateThing.color, x => rotateThing.color = x, new Color(1, 1, 1, 1), 0.15f);
         DOTween.To(() => background.color, x => background.color = x, new Color(0, 0, 0, 1), 0.25f)
             .OnComplete( () => StartCoroutine(ChangeScene(levelIndex)) );
@@ -74,12 +83,14 @@ public class GameManager : MonoBehaviour
     public void FinishLoading()
     {
         DOTween.To(() => rotateThing.color, x => rotateThing.color = x, new Color(1, 1, 1, 0), 0.15f);
+        DOTween.To(() => wizardImg.color, x => wizardImg.color = x, new Color(1, 1, 1, 0), 0.15f);
         DOTween.To(() => background.color, x => background.color = x, new Color(0, 0, 0, 0), 0.25f)
             .OnComplete(() => 
             {
                 background.gameObject.SetActive(false);
                 rotateThing.gameObject.SetActive(false);
-                if(corouSpin != null)
+                wizardImg.gameObject.SetActive(true);
+                if (corouSpin != null)
                 {
                     StopCoroutine(corouSpin);
                 }
@@ -98,15 +109,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void LoseScreen()
+    {
+        loseScreen.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+    }
+
     public static void DestroySelfAndGoToScene(int sceneIndex)
     {
         if(GameManager.instance != null)
         {
-            GameObject currentManager = GameManager.instance.gameObject;
-            GameManager.instance = null;
-            Destroy(currentManager);
+            print("yes instance");
+            DOTween.defaultTimeScaleIndependent = true;
+            GameManager.instance.rotateThing.gameObject.SetActive(true);
+            GameManager.instance.background.gameObject.SetActive(true);
+            GameManager.instance.wizardImg.gameObject.SetActive(true);
+
+            DOTween.To(() => GameManager.instance.wizardImg.color, x => GameManager.instance.wizardImg.color = x, new Color(1, 1, 1, 1), 0.15f);
+            DOTween.To(() => GameManager.instance.rotateThing.color, x => GameManager.instance.rotateThing.color = x, new Color(1, 1, 1, 1), 0.15f);
+            DOTween.To(() => GameManager.instance.background.color, x => GameManager.instance.background.color = x, new Color(0, 0, 0, 1), 0.25f).OnComplete(() =>
+            {
+                GameObject currentManager = GameManager.instance.gameObject;
+                GameManager.instance = null;
+                Destroy(currentManager);
+                SceneManager.LoadScene(sceneIndex);
+            });
+        } else
+        {
+            print("no instance");
+            SceneManager.LoadScene(sceneIndex);
         }
-        SceneManager.LoadScene(sceneIndex);
     }
     
 }
