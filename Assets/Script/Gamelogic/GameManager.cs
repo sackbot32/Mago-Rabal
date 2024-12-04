@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
     public List<string> enemies;
     public Image background;
     public Image rotateThing;
-    private Tweener tweener;
+    private Coroutine corouSpin;
     void Awake()
     {
 
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         rotateThing.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
-        tweener = rotateThing.transform.DORotate(rotateThing.transform.rotation.eulerAngles + new Vector3(0, 0, 360), 1f).SetLoops(-1).SetEase(Ease.Linear);
+        corouSpin = StartCoroutine(SpinLogo());
         DOTween.To(() => rotateThing.color, x => rotateThing.color = x, new Color(1, 1, 1, 1), 0.15f);
         DOTween.To(() => background.color, x => background.color = x, new Color(0, 0, 0, 1), 0.25f);
     }
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
         rotateThing.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
-        tweener = rotateThing.transform.DORotate(new Vector3(0, 0, 1), 0.1f).SetLoops(-1).SetEase(Ease.Linear);
+        corouSpin = StartCoroutine(SpinLogo());
         DOTween.To(() => rotateThing.color, x => rotateThing.color = x, new Color(1, 1, 1, 1), 0.15f);
         DOTween.To(() => background.color, x => background.color = x, new Color(0, 0, 0, 1), 0.25f)
             .OnComplete( () => StartCoroutine(ChangeScene(levelIndex)) );
@@ -58,11 +59,13 @@ public class GameManager : MonoBehaviour
     public IEnumerator ChangeScene(int levelIndex)
     {
         AsyncOperation sceneLoad = SceneManager.LoadSceneAsync(levelIndex);
-        while (!sceneLoad.isDone)
+        sceneLoad.allowSceneActivation = false;
+        while (sceneLoad.progress < 0.9f)
         {
-            print("load: " + sceneLoad.progress);
             yield return null;
         }
+
+        sceneLoad.allowSceneActivation = true;
     }
 
     public void FinishLoading()
@@ -71,11 +74,25 @@ public class GameManager : MonoBehaviour
         DOTween.To(() => background.color, x => background.color = x, new Color(0, 0, 0, 0), 0.25f)
             .OnComplete(() => 
             {
-                tweener.Kill();
                 background.gameObject.SetActive(false);
                 rotateThing.gameObject.SetActive(false);
-
+                if(corouSpin != null)
+                {
+                    StopCoroutine(corouSpin);
+                }
+                rotateThing.transform.rotation = Quaternion.identity;
+                
+                corouSpin = null;
             });
+    }
+
+    IEnumerator SpinLogo()
+    {
+        while (true)
+        {
+            rotateThing.transform.rotation = Quaternion.Euler(0,0, rotateThing.transform.rotation.eulerAngles.z - 0.2f);
+            yield return null;
+        }
     }
     
 }
