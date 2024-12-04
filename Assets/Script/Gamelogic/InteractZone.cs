@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
@@ -7,30 +9,35 @@ public class InteractZone : MonoBehaviour
 {
     //Components
     [SerializeField]
-    private GameObject canvas;
-    [SerializeField]
     private InputActionReference interactInput;
     //Setting
     public Action interactAction;
     public string key;
+    public string message;
+    public string noKeyMessage;
+    public TMP_Text playerText;
     //Data
     public Transform player;
-    private Vector3 dirToPlayer;
+    private bool inside;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        canvas.SetActive(false);
+        if(GameManager.instance.player != null)
+        {
+            player = GameManager.instance.player.transform;
+            playerText = player.GetChild(3).transform.GetChild(0).GetComponent<TMP_Text>();
+            playerText.enabled = false;
+        } else
+        {
+            StartCoroutine(GetPlayer());
+        }
     }
 
     private void Update()
     {
-        if(canvas.activeSelf)
+        if(inside)
         {
-            dirToPlayer = (player.position - transform.position).normalized;
-            canvas.transform.right = -dirToPlayer;
-            canvas.transform.rotation = Quaternion.Euler(0, canvas.transform.rotation.eulerAngles.y, 0);
             if(key.Length == 0)
             {
                 if (interactInput.action.WasPressedThisFrame())
@@ -63,11 +70,25 @@ public class InteractZone : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && playerText != null)
         {
-            if (!canvas.activeSelf)
+            if (!inside)
             {
-                canvas.SetActive(true);
+                inside = true;
+                if(key.Length  > 0)
+                {
+                    if (GameManager.instance.keys.Contains(key))
+                    {
+                        playerText.text = message;
+                    } else
+                    {
+                        playerText.text = noKeyMessage;
+                    }
+                } else
+                {
+                    playerText.text = message;
+                }
+                playerText.enabled = true;
             }
             
         }
@@ -75,9 +96,24 @@ public class InteractZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && playerText != null)
         {
-            canvas.SetActive(false);
+            inside = false;
+            playerText.enabled = false;
         }
+    }
+
+    IEnumerator GetPlayer()
+    {
+        while(player == null)
+        {
+            if (GameManager.instance.player != null)
+            { 
+                player = GameManager.instance.player.transform;
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
+        playerText = player.GetChild(3).transform.GetChild(0).GetComponent<TMP_Text>();
+        playerText.enabled = false;
     }
 }

@@ -626,7 +626,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
         type: 3}
-      insertIndex: 1
+      insertIndex: -1
       addedObject: {fileID: 227858168}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f685aec3b995dd743bd55947d6905d5b, type: 3}
@@ -697,6 +697,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FireballEnem (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839819610610417762, guid: 01b8caa68bda65d4cb7d429a129f9197,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839819610610417762, guid: 01b8caa68bda65d4cb7d429a129f9197,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1116,6 +1126,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireballEnem (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8839819610610417762, guid: 01b8caa68bda65d4cb7d429a129f9197,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839819610610417762, guid: 01b8caa68bda65d4cb7d429a129f9197,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1188,6 +1208,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FireballEnem (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839819610610417762, guid: 01b8caa68bda65d4cb7d429a129f9197,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839819610610417762, guid: 01b8caa68bda65d4cb7d429a129f9197,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2136,7 +2166,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
         type: 3}
-      insertIndex: 1
+      insertIndex: -1
       addedObject: {fileID: 2042874830}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f685aec3b995dd743bd55947d6905d5b, type: 3}
@@ -2207,6 +2237,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ThunderEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743948305451981247, guid: ee6047f45a206e44e9496359ab02e0e3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743948305451981247, guid: ee6047f45a206e44e9496359ab02e0e3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2988,6 +3028,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireballEnem
       objectReference: {fileID: 0}
+    - target: {fileID: 8839819610610417762, guid: 01b8caa68bda65d4cb7d429a129f9197,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839819610610417762, guid: 01b8caa68bda65d4cb7d429a129f9197,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3357,7 +3407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1282598586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3736,6 +3786,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1711522256882916098, guid: 7c7bb81e913cebb459c31c1da8aa0a9a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711522256882916098, guid: 7c7bb81e913cebb459c31c1da8aa0a9a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711522256882916098, guid: 7c7bb81e913cebb459c31c1da8aa0a9a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2288067574094595109, guid: 7c7bb81e913cebb459c31c1da8aa0a9a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2710979502570332248, guid: 7c7bb81e913cebb459c31c1da8aa0a9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3874,6 +3944,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749280854390788074, guid: 7363dca404605324d93fd3ed9cd2288d,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749280854390788074, guid: 7363dca404605324d93fd3ed9cd2288d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5241313118853509256, guid: 7363dca404605324d93fd3ed9cd2288d,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5241313118853509256, guid: 7363dca404605324d93fd3ed9cd2288d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686734464432477734, guid: 7363dca404605324d93fd3ed9cd2288d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

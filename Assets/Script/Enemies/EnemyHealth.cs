@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour, IHealth
 {
@@ -8,7 +9,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
     private Animator anim;
     [SerializeField]
     private GameObject deathParticle;
-    
+    [SerializeField]
+    private Slider healthBar;
     //Settings
     public float maxHealth;
 
@@ -19,6 +21,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
     void Start()
     {
         currentHealth = maxHealth;
+        healthBar.maxValue = maxHealth;
+        healthBar.value = currentHealth;
     }
 
 
@@ -34,6 +38,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         {
             anim.Play("recibirdano",2);
         }
+        healthBar.value = currentHealth;
     }
     public void Heal(float healing)
     {
@@ -42,9 +47,11 @@ public class EnemyHealth : MonoBehaviour, IHealth
         {
             currentHealth = maxHealth;
         }
+        healthBar.value = currentHealth;
     }
     public void Death()
     {
+        healthBar.gameObject.SetActive(false);
         StartCoroutine(DeathProcces());
     }
 
