@@ -11,13 +11,19 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public float damageMultiplierForDefense;
     //Data
     [SerializeField]
-    private float currentHealth;
+    public float currentHealth;
     public bool defenseOn;
     void Start()
     {
-        healthBar.maxValue = maxHealth;
-        currentHealth = maxHealth;
-        healthBar.value = currentHealth;
+        if(GameManager.instance.currentHealth <= 0)
+        {
+            currentHealth = maxHealth;
+        } else
+        {
+            currentHealth = GameManager.instance.currentHealth;
+        }
+            healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
     }
 
 
@@ -31,6 +37,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
             currentHealth -= damage;
         }
         healthBar.value = currentHealth;
+        GameManager.instance.currentHealth = currentHealth;
         if (currentHealth <= 0 )
         {
             currentHealth = 0;
@@ -42,10 +49,16 @@ public class PlayerHealth : MonoBehaviour, IHealth
     {
         currentHealth += healing;
         healthBar.value = currentHealth;
+        GameManager.instance.currentHealth = currentHealth;
         if (currentHealth >= maxHealth )
         {
             currentHealth = maxHealth;
         }
+    }
+
+    public bool IsHealthFull()
+    {
+        return (currentHealth >= maxHealth);
     }
     public void Death()
     {

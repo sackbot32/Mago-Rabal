@@ -55,7 +55,13 @@ public class SpellCaster : MonoBehaviour
         }
         spellSelector = GameManager.instance.spellSelector;
         spellSelector.spellCaster = this;
-        ChangeSpell(spellSelector.spellSlots[0].spells[0]);
+        if(GameManager.instance.currentSpellSlot == 0 && GameManager.instance.currentSpotInSlot == 0)
+        {
+            ChangeSpell(spellSelector.spellSlots[0].spells[0]);
+        } else
+        {
+            ChangeSpell(spellSelector.spellSlots[GameManager.instance.currentSpellSlot].spells[GameManager.instance.currentSpotInSlot]);
+        }
     }
 
 

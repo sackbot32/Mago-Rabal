@@ -14,8 +14,10 @@ public class SpellSelector : MonoBehaviour
     public SpellSlot[] spellSlots;
     public InputActionAsset selectInput;
 
-    private int currentSpellSlot;
-    private int[] weaponSelectedSlot;
+    public int currentSpellSlot;
+    public int[] weaponSelectedSlot;
+
+
 
     void Start()
     {
@@ -65,6 +67,9 @@ public class SpellSelector : MonoBehaviour
             {
                 weaponSelectedSlot[currentSpellSlot] = 0;
             }
+            GameManager.instance.currentSpellSlot = currentSpellSlot;
+            GameManager.instance.currentSpotInSlot = weaponSelectedSlot[currentSpellSlot];
+
         }
     }
 
@@ -116,4 +121,5 @@ public class SpellSelector : MonoBehaviour
             spellSlots[slot].spells[posInSlot] = newSpell;
         }
     }
+
 }

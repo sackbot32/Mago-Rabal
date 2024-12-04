@@ -13,7 +13,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
     private Slider healthBar;
     //Settings
     public float maxHealth;
-
+    [SerializeField]
+    private GameObject healItem;
     //Data
     [SerializeField]
     private float currentHealth;
@@ -65,6 +66,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         anim.Play("magomuerte");
         yield return new WaitForSeconds(2f);
         Instantiate(deathParticle,transform.position,Quaternion.identity);
+        Instantiate(healItem, transform.position, Quaternion.identity);
         Destroy(gameObject);
 
     }

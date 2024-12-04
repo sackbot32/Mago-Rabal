@@ -803,6 +803,7 @@ MonoBehaviour:
   deathParticle: {fileID: 100008, guid: cbf83cbf75cdb874c9333de4ab55b690, type: 3}
   healthBar: {fileID: 3089818787889885843}
   maxHealth: 100
+  healItem: {fileID: 743951513377402604, guid: 72b8709c1badd1741a1fd558d0322f5e, type: 3}
   currentHealth: 0
 --- !u!114 &5726902778722196108
 MonoBehaviour:

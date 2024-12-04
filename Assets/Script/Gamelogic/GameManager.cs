@@ -10,7 +10,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject player;
+    public float currentHealth;
     public SpellSelector spellSelector;
+    public int currentSpellSlot;
+    public int currentSpotInSlot;
     public DoorObject currentDoorObject;
     public List<string> keys;
     public List<string> enemies;
