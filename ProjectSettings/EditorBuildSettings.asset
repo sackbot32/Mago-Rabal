@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Escenas/Iglesia/Iglesia2.unity
     guid: acf9f2092e62b7847b8d9e40bf0c40d7
+  - enabled: 1
+    path: Assets/Scenes/Escenas/Innovacion.unity
+    guid: d431eb87ed3ba5f4db0b6f0bda7a8080
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2dd9c78e2b3faf84d88fe384166a1d62,
       type: 3}

@@ -101,6 +101,9 @@ MonoBehaviour:
   tagsToCheck: []
   generalTagsToDeactivate:
   - Floor
+  - Untagged
+  - Building
+  - Props
   proyectileName: 
 --- !u!114 &-2591542500746675030
 MonoBehaviour:
@@ -114,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cff92af1f8ce6f47babb9f1a8b88ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  corroutineNames: []
 --- !u!1001 &8837150030834874260
 PrefabInstance:
   m_ObjectHideFlags: 0

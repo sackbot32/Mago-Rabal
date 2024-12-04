@@ -3694,6 +3694,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2422479669431817393, guid: 94a6522fd259de64ab0ed0895690dd21,
+        type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 2422479669431817406, guid: 94a6522fd259de64ab0ed0895690dd21,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3968,6 +3973,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945841607356702568, guid: 94a6522fd259de64ab0ed0895690dd21,
+        type: 3}
+      propertyPath: m_TagString
+      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 3971881569351518877, guid: 94a6522fd259de64ab0ed0895690dd21,
         type: 3}
@@ -8374,6 +8384,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2473293079978166749, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: message
+      value: Pulsa E para entrar en la Iglesia
+      objectReference: {fileID: 0}
     - target: {fileID: 2615240376329657465, guid: f685aec3b995dd743bd55947d6905d5b,
         type: 3}
       propertyPath: m_IsActive
@@ -9950,6 +9965,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945841607400075062, guid: 1cfd1f71c168cf34183a493d6f73cc7b,
         type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945841607400075062, guid: 1cfd1f71c168cf34183a493d6f73cc7b,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 26
       objectReference: {fileID: 0}
@@ -10224,6 +10244,146 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694500193}
   m_CullTransparentMesh: 1
+--- !u!1001 &1837023340
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 997990305688186185, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 997990305688186185, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 997990305688186185, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 997990305688186185, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 997990305688186185, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 997990305688186185, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473293079978166749, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: message
+      value: Pulsa E para entrar en el Centro de Innovacion
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615240376329657465, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067746103244646607, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_Name
+      value: GeneralDoor (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5208909678824581717, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: ownDoor
+      value: 
+      objectReference: {fileID: 11400000, guid: 4897ea5d0058b9b48b389b12e85421d7,
+        type: 2}
+    - target: {fileID: 5208909678824581717, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: doorTarget
+      value: 
+      objectReference: {fileID: 11400000, guid: f1be10df25530254da3d1433689d39e3,
+        type: 2}
+    - target: {fileID: 5271496321228768771, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271496321228768771, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271496321228768771, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271496321228768771, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -44.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 231.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418538710710470121, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f685aec3b995dd743bd55947d6905d5b, type: 3}
 --- !u!114 &1840814833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11165,4 +11325,5 @@ SceneRoots:
   - {fileID: 1047247323}
   - {fileID: 33342938}
   - {fileID: 520979869}
+  - {fileID: 1837023340}
   - {fileID: 1255283081}

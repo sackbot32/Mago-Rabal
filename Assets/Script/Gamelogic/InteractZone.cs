@@ -103,6 +103,15 @@ public class InteractZone : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        inside = false;
+        if(playerText != null)
+        {
+            playerText.enabled = false;
+        }
+    }
+
     IEnumerator GetPlayer()
     {
         while(player == null)

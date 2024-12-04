@@ -1452,6 +1452,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2473293079978166749, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: message
+      value: Pulsa E para bajar al primer piso
+      objectReference: {fileID: 0}
     - target: {fileID: 5067746103244646607, guid: f685aec3b995dd743bd55947d6905d5b,
         type: 3}
       propertyPath: m_Name
@@ -2576,6 +2581,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1261616399946027965, guid: dbdf93190fd5a914cae2ce1c53cbc20d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 1930348530869160199, guid: dbdf93190fd5a914cae2ce1c53cbc20d,
         type: 3}
       propertyPath: m_LocalScale.y
@@ -3182,6 +3192,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 98f9da815d70f264a9d8fa5c4c7e54d0,
         type: 3}
+    - target: {fileID: 7789515116553674663, guid: 7651ad2a28048574985e6c54d9182220,
+        type: 3}
+      propertyPath: message
+      value: Pulsa E para obtener Bendicion
+      objectReference: {fileID: 0}
     - target: {fileID: 8188003513355162816, guid: 7651ad2a28048574985e6c54d9182220,
         type: 3}
       propertyPath: m_Name
@@ -4928,6 +4943,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d83b769f28066464b96bee9e587cae66,
+        type: 3}
+      propertyPath: m_TagString
+      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

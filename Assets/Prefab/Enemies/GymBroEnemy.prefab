@@ -286,8 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c048f30dcea05b543bed5f923975e749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMagnitudeThreshold: 18
-  damageMultiplier: 0.5
+  speedMagnitudeThreshold: 64
+  damageMultiplier: 0.1
 --- !u!114 &1339668855982836061
 MonoBehaviour:
   m_ObjectHideFlags: 0
