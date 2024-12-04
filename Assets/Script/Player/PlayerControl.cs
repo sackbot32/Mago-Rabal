@@ -79,11 +79,6 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         //Debug teleport
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            transform.position = new Vector3(0,1,0);
-            rb.linearVelocity = new Vector3(0,0,0);
-        }
         moveDir = moveInput.action.ReadValue<Vector2>().normalized;
         lookDir = lookInput.action.ReadValue<Vector2>();
         DetectGround();
@@ -96,7 +91,10 @@ public class PlayerControl : MonoBehaviour
         {
             StartCoroutine(DrainWhileSprinting());
         }
-        Look();
+        if(Time.timeScale != 0)
+        {
+            Look();
+        }
 
     }
 

@@ -97,5 +97,16 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
     }
+
+    public static void DestroySelfAndGoToScene(int sceneIndex)
+    {
+        if(GameManager.instance != null)
+        {
+            GameObject currentManager = GameManager.instance.gameObject;
+            GameManager.instance = null;
+            Destroy(currentManager);
+        }
+        SceneManager.LoadScene(sceneIndex);
+    }
     
 }

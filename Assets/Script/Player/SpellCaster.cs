@@ -67,13 +67,17 @@ public class SpellCaster : MonoBehaviour
 
     void Update()
     {
-        currentSpellObject.timeSinceLastCast += Time.deltaTime;
-        if (isAutomatic)
+        if(Time.timeScale > 0)
         {
-            AutomaticCasting();
-        } else
-        {
-            SemiAutomaticCasting();
+            currentSpellObject.timeSinceLastCast += Time.deltaTime;
+        
+            if (isAutomatic)
+            {
+                AutomaticCasting();
+            } else
+            {
+                SemiAutomaticCasting();
+            }
         }
         
     }
