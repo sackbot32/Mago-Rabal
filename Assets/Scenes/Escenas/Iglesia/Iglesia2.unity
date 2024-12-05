@@ -3519,20 +3519,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2080020739}
     m_Modifications:
-    - target: {fileID: 2466235196746214561, guid: 148e7cecea1e5f440b68ee6101834563,
+    - target: {fileID: 781942912501863270, guid: 148e7cecea1e5f440b68ee6101834563,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.49
+      propertyPath: m_text
+      value: Una vez obtenido, pulsa 3 para equipar el hechizo de Bendicion
       objectReference: {fileID: 0}
-    - target: {fileID: 2466235196746214561, guid: 148e7cecea1e5f440b68ee6101834563,
+    - target: {fileID: 781942912501863270, guid: 148e7cecea1e5f440b68ee6101834563,
         type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.49
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a28321cb349d7842baf2c2200a229ec,
+        type: 2}
+    - target: {fileID: 781942912501863270, guid: 148e7cecea1e5f440b68ee6101834563,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7045677499410546168, guid: 0a28321cb349d7842baf2c2200a229ec,
+        type: 2}
+    - target: {fileID: 781942912501863270, guid: 148e7cecea1e5f440b68ee6101834563,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2466235196746214561, guid: 148e7cecea1e5f440b68ee6101834563,
+    - target: {fileID: 781942912501863270, guid: 148e7cecea1e5f440b68ee6101834563,
         type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.49
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381506003802060292, guid: 148e7cecea1e5f440b68ee6101834563,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 413.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381506003802060292, guid: 148e7cecea1e5f440b68ee6101834563,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 104.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381506003802060292, guid: 148e7cecea1e5f440b68ee6101834563,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381506003802060292, guid: 148e7cecea1e5f440b68ee6101834563,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381506003802060292, guid: 148e7cecea1e5f440b68ee6101834563,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2466235196746214561, guid: 148e7cecea1e5f440b68ee6101834563,
         type: 3}
@@ -3584,26 +3621,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2466235196746214561, guid: 148e7cecea1e5f440b68ee6101834563,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4574024864601751569, guid: 148e7cecea1e5f440b68ee6101834563,
         type: 3}
       propertyPath: m_Name
       value: Message_Board
       objectReference: {fileID: 0}
-    - target: {fileID: 5701175837010063578, guid: 148e7cecea1e5f440b68ee6101834563,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.062
-      objectReference: {fileID: 0}
-    - target: {fileID: 7199979880647187338, guid: 148e7cecea1e5f440b68ee6101834563,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 32b6dd94832f14447aea408e00e9819e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
