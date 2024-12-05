@@ -40,4 +40,6 @@ MonoBehaviour:
   castParticle: {fileID: 100014, guid: 27d7dcefc9cca9248a4e5bff86cdc8ef, type: 3}
   proyectileHitParticle: {fileID: 100006, guid: f8fe7b9d0eb12704184b04bc4e8f5e17,
     type: 3}
-  timeSinceLastCast: 4.573111
+  castSound: {fileID: 8300000, guid: c1849bcdc14320f4ebbae2c8feb19efc, type: 3}
+  detSound: {fileID: 8300000, guid: c087edacdcb92a9468667d0387aa2c81, type: 3}
+  timeSinceLastCast: 1.5051811

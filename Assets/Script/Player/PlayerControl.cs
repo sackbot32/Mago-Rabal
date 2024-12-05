@@ -22,6 +22,12 @@ public class PlayerControl : MonoBehaviour
     private LayerMask layer;
     private Transform feet;
     private Camera handCamera;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip walk;
+    [SerializeField]
+    private AudioClip jump;
     //Settings
     [Header("Movement Settings")]
     public float addedSpeed;
@@ -80,6 +86,10 @@ public class PlayerControl : MonoBehaviour
     {
         //Debug teleport
         moveDir = moveInput.action.ReadValue<Vector2>().normalized;
+        if (audioSource.isPlaying && DetectGround() && moveDir == Vector2.zero)
+        {
+            audioSource.Stop();
+        }
         lookDir = lookInput.action.ReadValue<Vector2>();
         DetectGround();
         if (jumpInput.action.WasPressedThisFrame() && canJump)
@@ -173,10 +183,31 @@ public class PlayerControl : MonoBehaviour
             }
             rb.linearVelocity = transform.forward * newFValue + transform.right * newRValue + transform.up*rb.linearVelocity.y;
         }
+        if(Mathf.Abs(rb.linearVelocity.x) > 0 || Mathf.Abs(rb.linearVelocity.z) > 0)
+        {
+            if (!audioSource.isPlaying && DetectGround())
+            {
+                audioSource.clip = walk;
+                audioSource.loop = true;
+                audioSource.pitch = Random.Range(0.95f, 1.05f);
+                audioSource.Play();
+            }
+        } else
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
     }
 
     private void Jump()
     {
+        audioSource.Stop();
+        audioSource.clip = jump;
+        audioSource.loop = false;
+        audioSource.pitch = Random.Range(0.95f, 1.05f);
+        audioSource.Play();
         rb.AddForce(transform.up * jumpForce * rb.mass);
         
     }

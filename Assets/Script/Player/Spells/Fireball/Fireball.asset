@@ -30,12 +30,14 @@ MonoBehaviour:
   - name: TimeBetween
     value: 0.1
   - name: HitPosX
-    value: 58.586918
+    value: 15.571941
   - name: HitPosY
-    value: 16.211988
+    value: 1.0861096
   - name: HitPosZ
-    value: 45.395023
+    value: 14.503069
   castParticle: {fileID: 100008, guid: 538596e9c1bdfb04c9014d0b92d71df4, type: 3}
   proyectileHitParticle: {fileID: 100006, guid: cd7726bf1d6190c4aa8337b874abe2d0,
     type: 3}
-  timeSinceLastCast: 3.638766
+  castSound: {fileID: 8300000, guid: fb69713ce09ed574f838e4d14594f15d, type: 3}
+  detSound: {fileID: 8300000, guid: c087edacdcb92a9468667d0387aa2c81, type: 3}
+  timeSinceLastCast: 1.338074
