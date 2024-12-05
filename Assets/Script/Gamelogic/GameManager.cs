@@ -21,10 +21,11 @@ public class GameManager : MonoBehaviour
     public Image rotateThing;
     public Image wizardImg;
     public GameObject loseScreen;
+    public AudioManager audioMan;
     private Coroutine corouSpin;
     void Awake()
     {
-
+        audioMan = GetComponent<AudioManager>();
         if (instance == null)
         {
             Time.timeScale = 1;
@@ -33,9 +34,11 @@ public class GameManager : MonoBehaviour
             keys = new List<string>();
             enemies = new List<string>();
             instance = this;
+            audioMan.PlaySong();
             DontDestroyOnLoad(gameObject);
         } else
         {
+            instance.audioMan.ChangeSong(audioMan.music);
             Destroy(gameObject);
         }
         if (player == null)
