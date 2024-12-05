@@ -11,6 +11,10 @@ public class EnemyHealth : MonoBehaviour, IHealth
     private GameObject deathParticle;
     [SerializeField]
     private Slider healthBar;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip takeDamageSound;
     //Settings
     public float maxHealth;
     [SerializeField]
@@ -21,6 +25,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
     private bool isDead;
     void Start()
     {
+        
         currentHealth = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
@@ -37,6 +42,9 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
         } else
         {
+            audioSource.clip = takeDamageSound;
+            audioSource.pitch = Random.Range(0.95f, 1.05f);
+            audioSource.Play();
             anim.Play("recibirdano",2);
         }
         healthBar.value = currentHealth;
@@ -65,7 +73,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         }
         anim.Play("magomuerte");
         yield return new WaitForSeconds(2f);
-        Instantiate(deathParticle,transform.position,Quaternion.identity);
+        Instantiate(deathParticle,transform.position,Quaternion.identity).GetComponent<AudioSource>().pitch = Random.Range(0.95f, 1.05f);
         Instantiate(healItem, transform.position, Quaternion.identity);
         Destroy(gameObject);
 
