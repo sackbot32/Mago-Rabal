@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Animations;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.Audio;
 
 public class FireballEnemy : MonoBehaviour, IEnemyAI
 {
@@ -19,6 +20,7 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     private Animator anim;
     [SerializeField]
     private ActionForAnimEvent animEvent;
+    private AudioSource spellAudioSource;
     //Settings
     public Transform patrolPointsParent;
     public float tooCloseToPlayer;
@@ -42,6 +44,7 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
     void Start()
     {
         layer = LayerMask.GetMask("Ground");
+        spellAudioSource = shootPoint.GetComponent<AudioSource>();
         lastPointSeen = Vector3.zero;
         agent = GetComponent<NavMeshAgent>();
         brain = GetComponent<StateMachine>();
@@ -266,6 +269,8 @@ public class FireballEnemy : MonoBehaviour, IEnemyAI
 
     private void ShootSpell()
     {
+        spellAudioSource.pitch = Random.Range(0.95f, 1.05f);
+        spellAudioSource.Play();
         GameObject newProyectile = Instantiate(spellObject.spellProyectile, shootPoint.position, shootPoint.rotation);
         Vector3 shootDir = player.transform.position - shootPoint.position;
         newProyectile.GetComponent<Rigidbody>().linearVelocity = shootDir.normalized * spellObject.proyectileSpeed;

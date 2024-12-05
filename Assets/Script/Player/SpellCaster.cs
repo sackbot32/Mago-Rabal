@@ -23,6 +23,7 @@ public class SpellCaster : MonoBehaviour
     [SerializeField]
     private Image spellImage;
     private SpellSelector spellSelector;
+    private AudioSource spellAudioSource;
     //These will be filled by a serializedobject later
     [Header("Spell Settings")]
     public BaseSpellObject currentSpellObject;
@@ -42,6 +43,9 @@ public class SpellCaster : MonoBehaviour
     [Header("Visual spell settings")]
     public GameObject castParticle;
     public GameObject proyectileHitParticle;
+    [Header("Audio spell settings")]
+    public AudioClip castSound;
+    public AudioClip detSound;
 
     //Data
     
@@ -49,6 +53,7 @@ public class SpellCaster : MonoBehaviour
     void Start()
     {
         DOTween.Init();
+        spellAudioSource = castSourcePoint.gameObject.GetComponent<AudioSource>();
         if(GameManager.instance.player == null)
         {
             GameManager.instance.player = gameObject;
@@ -96,17 +101,21 @@ public class SpellCaster : MonoBehaviour
                 casticle.transform.forward = castSourcePoint.forward;
                 casticle.transform.parent = castSourcePoint;
             }
+            PlaySoundOnCastSource(castSound);
             CastProyectile();
         }
         if (detonateInput.action.WasPressedThisFrame())
         {
             //TODO detonate animation and particles
+            PlaySoundOnCastSource(detSound);
             armAnim.Play("cerrar");
+            PlaySoundOnCastSource(detSound, false);
             detonateAction.Invoke(currentAtributes);
         }
         if (castAtSelfInput.action.WasPressedThisFrame() && currentSpellObject.timeSinceLastCast >= rate)
         {
             armAnim.Play("amimismo", -1, 0);
+            PlaySoundOnCastSource(castSound);
             currentSpellObject.timeSinceLastCast = 0;
             //TODO cast at self animation and particles
             castAtSelfAction.Invoke(gameObject, currentAtributes);
@@ -124,6 +133,7 @@ public class SpellCaster : MonoBehaviour
                 casticle.transform.forward = castSourcePoint.forward;
                 casticle.transform.parent = castSourcePoint;
             }
+            PlaySoundOnCastSource(castSound);
             currentSpellObject.timeSinceLastCast = 0;
             armAnim.SetBool("AutomaticShooting", true);
             CastProyectile();
@@ -134,12 +144,14 @@ public class SpellCaster : MonoBehaviour
         {
             //TODO detonate animation and particles
             armAnim.Play("cerrar");
+            PlaySoundOnCastSource(detSound,false);
             detonateAction.Invoke(currentAtributes);
         }
         if (castAtSelfInput.action.WasPressedThisFrame() && currentSpellObject.timeSinceLastCast >= rate)
         {
             armAnim.Play("amimismo", -1, 0);
             currentSpellObject.timeSinceLastCast = 0;
+            PlaySoundOnCastSource(castSound);
             //TODO cast at self animation and particles
             castAtSelfAction.Invoke(gameObject, currentAtributes);
         }
@@ -157,6 +169,8 @@ public class SpellCaster : MonoBehaviour
         proyectileHitParticle = newSpellObject.proyectileHitParticle;
         isAutomatic = newSpellObject.isAutomatic;
         tagProyectileDetects = newSpellObject.tagProyectileDetects;
+        castSound = newSpellObject.castSound;
+        detSound = newSpellObject.detSound;
         currentAtributes = newSpellObject.atributes;
         currentImage = newSpellObject.spellSprite;
         StartCoroutine(ChangeImage(currentImage));
@@ -204,5 +218,22 @@ public class SpellCaster : MonoBehaviour
         newProyectile.GetComponent<SpellProyectile>().SetProyectileSettings(hitAction,currentAtributes, tagProyectileDetects,spellProyectileName,proyectileHitParticle);
     }
 
+    private void PlaySoundOnCastSource(AudioClip clip,bool canOverLap = true)
+    {
+        if (canOverLap)
+        {
+            spellAudioSource.clip = clip;
+            spellAudioSource.pitch = UnityEngine.Random.Range(0.95f,1.05f);
+            spellAudioSource.Play();
+        } else
+        {
+            if (!spellAudioSource.isPlaying)
+            {
+                spellAudioSource.clip = clip;
+                spellAudioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+                spellAudioSource.Play();
+            }
+        }
+    }
 
 }

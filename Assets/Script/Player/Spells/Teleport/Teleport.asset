@@ -25,12 +25,14 @@ MonoBehaviour:
   spellType: 5
   atributes:
   - name: HitPosX
-    value: 31.69909
+    value: 23.934689
   - name: HitPosY
-    value: 0.22164324
+    value: 0.14862648
   - name: HitPosZ
-    value: 6.4726734
+    value: 15.609047
   castParticle: {fileID: 100000, guid: c7484a8f36399494bb032f45dfe9beb4, type: 3}
   proyectileHitParticle: {fileID: 100010, guid: da3ad6aeb7c5ad74299861d990c6acf1,
     type: 3}
-  timeSinceLastCast: 2.0417855
+  castSound: {fileID: 8300000, guid: 50ead432cafb0314e8e6898a5680eba3, type: 3}
+  detSound: {fileID: 8300000, guid: c087edacdcb92a9468667d0387aa2c81, type: 3}
+  timeSinceLastCast: 0.88818675

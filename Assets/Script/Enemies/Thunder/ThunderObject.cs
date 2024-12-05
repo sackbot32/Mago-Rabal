@@ -49,7 +49,7 @@ public class ThunderObject : MonoBehaviour
         yield return new WaitForSeconds(colliderWaitTillOn);
         follow = false;
         yield return new WaitForSeconds(colliderWaitTillOn/2f);
-        Instantiate(thunderParticle,transform.position, Quaternion.identity);
+        Instantiate(thunderParticle,transform.position, Quaternion.identity).GetComponent<AudioSource>().pitch = Random.Range(0.95f,1.05f);
         hitBox.enabled = true;
         yield return new WaitForSeconds(colliderWaitTillOff);
         Destroy(gameObject);

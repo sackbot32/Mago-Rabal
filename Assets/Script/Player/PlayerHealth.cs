@@ -6,6 +6,12 @@ public class PlayerHealth : MonoBehaviour, IHealth
     //Components
     [SerializeField]
     private Slider healthBar;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip takeDamageSound;
+    [SerializeField]
+    private AudioClip deathSound;
     //Settings
     public float maxHealth;
     public float damageMultiplierForDefense;
@@ -38,6 +44,9 @@ public class PlayerHealth : MonoBehaviour, IHealth
         }
         healthBar.value = currentHealth;
         GameManager.instance.currentHealth = currentHealth;
+        audioSource.clip = takeDamageSound;
+        audioSource.pitch = Random.Range(0.95f, 1.05f);
+        audioSource.Play();
         if (currentHealth <= 0 )
         {
             currentHealth = 0;
@@ -62,6 +71,9 @@ public class PlayerHealth : MonoBehaviour, IHealth
     }
     public void Death()
     {
+        audioSource.clip = deathSound;
+        audioSource.pitch = 1;
+        audioSource.Play();
         GameManager.instance.LoseScreen();
     }
 }
