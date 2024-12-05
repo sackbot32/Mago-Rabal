@@ -20,6 +20,9 @@ public class BaseSpellObject : ScriptableObject
     [Header("Visual")]
     public GameObject castParticle;
     public GameObject proyectileHitParticle;
+    [Header("Audio")]
+    public AudioClip castSound;
+    public AudioClip detSound;
     //Data
     public float timeSinceLastCast;
 }
