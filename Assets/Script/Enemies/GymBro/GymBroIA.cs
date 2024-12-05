@@ -20,6 +20,7 @@ public class GymBroIA : MonoBehaviour, IEnemyAI
     private ActionForAnimEvent animEvent;
     [SerializeField]
     private PhysicalAttack attack;
+    private AudioSource audioSource;
     //Settings
     public Transform patrolPointsParent;
     public float timeBetweenAttacks;
@@ -42,6 +43,7 @@ public class GymBroIA : MonoBehaviour, IEnemyAI
     private LayerMask layer;
     void Start()
     {
+        audioSource = attack.GetComponent<AudioSource>();
         layer = LayerMask.GetMask("Ground");
         lastPointSeen = Vector3.zero;
         agent = GetComponent<NavMeshAgent>();
@@ -228,11 +230,14 @@ public class GymBroIA : MonoBehaviour, IEnemyAI
 
     public void EnableAttackCollision()
     {
+        audioSource.pitch = Random.Range(0.95f,1.05f);
+        audioSource.Play();
         attack.boxCollider.enabled = true;
     }
 
     public void DisableAttackCollision()
     {
+        audioSource.Stop();
         attack.boxCollider.enabled = false;
     }
 

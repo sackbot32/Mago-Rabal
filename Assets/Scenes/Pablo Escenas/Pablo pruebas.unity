@@ -930,32 +930,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GymBroEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 945069110874620801, guid: e6e9d52d8120a8c4282f466f4fccd9ed,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4224876857123861513, guid: e6e9d52d8120a8c4282f466f4fccd9ed,
-        type: 3}
-      propertyPath: healItem
-      value: 
-      objectReference: {fileID: 743951513377402604, guid: 72b8709c1badd1741a1fd558d0322f5e,
-        type: 3}
-    - target: {fileID: 4268567117190527212, guid: e6e9d52d8120a8c4282f466f4fccd9ed,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268567117190527212, guid: e6e9d52d8120a8c4282f466f4fccd9ed,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268567117190527212, guid: e6e9d52d8120a8c4282f466f4fccd9ed,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6055004530347816474, guid: e6e9d52d8120a8c4282f466f4fccd9ed,
         type: 3}
       propertyPath: m_LocalPosition.x
