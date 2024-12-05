@@ -1599,6 +1599,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e3fdb96cb15e72d49866bdd5fa079fc3,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: e3fdb96cb15e72d49866bdd5fa079fc3,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: e3fdb96cb15e72d49866bdd5fa079fc3,
         type: 3}
       propertyPath: m_Name
@@ -2968,6 +2974,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065362631822422635, guid: 7d1e18c3bec32454f8d3e7a250d5a362,
+        type: 3}
+      propertyPath: m_InnerSpotPercent
+      value: 4.931648
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491672212733336377, guid: 7d1e18c3bec32454f8d3e7a250d5a362,
+        type: 3}
+      propertyPath: m_Range
+      value: 17.381308
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491672212733336377, guid: 7d1e18c3bec32454f8d3e7a250d5a362,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 1179709.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491672212733336377, guid: 7d1e18c3bec32454f8d3e7a250d5a362,
+        type: 3}
+      propertyPath: m_SpotAngle
+      value: 125.17951
       objectReference: {fileID: 0}
     - target: {fileID: 8461036599309308244, guid: 7d1e18c3bec32454f8d3e7a250d5a362,
         type: 3}
@@ -4485,7 +4511,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 8ba92e2dd7f884a0f88b98fa2d235fe7, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 99f0dc0a6f2f7a24989f94e275b0279e, type: 2}
 --- !u!4 &1627525091
 Transform:
   m_ObjectHideFlags: 0
@@ -4558,6 +4584,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065362631822422635, guid: 7d1e18c3bec32454f8d3e7a250d5a362,
+        type: 3}
+      propertyPath: m_InnerSpotPercent
+      value: 5.362656
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491672212733336377, guid: 7d1e18c3bec32454f8d3e7a250d5a362,
+        type: 3}
+      propertyPath: m_Range
+      value: 11.441086
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491672212733336377, guid: 7d1e18c3bec32454f8d3e7a250d5a362,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 1373287.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491672212733336377, guid: 7d1e18c3bec32454f8d3e7a250d5a362,
+        type: 3}
+      propertyPath: m_SpotAngle
+      value: 115.11859
       objectReference: {fileID: 0}
     - target: {fileID: 8461036599309308244, guid: 7d1e18c3bec32454f8d3e7a250d5a362,
         type: 3}
@@ -4761,8 +4807,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 100000
+  m_Color: {r: 0.9452184, g: 0.8392157, b: 1, a: 1}
+  m_Intensity: 15672.985
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4803,7 +4849,7 @@ Light:
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 2
-  m_AreaSize: {x: 1, y: 1}
+  m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 1
