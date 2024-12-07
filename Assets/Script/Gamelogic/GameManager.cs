@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            rotateThing.transform.rotation = Quaternion.Euler(0, rotateThing.transform.rotation.eulerAngles.y - 0.2f, 0);
+            rotateThing.transform.rotation = Quaternion.Euler(0, rotateThing.transform.rotation.eulerAngles.y - 2f, 0);
             yield return null;
         }
     }

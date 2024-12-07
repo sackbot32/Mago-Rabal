@@ -3,7 +3,7 @@ using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Animations;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
 
 public class GymBroIA : MonoBehaviour, IEnemyAI
 {
