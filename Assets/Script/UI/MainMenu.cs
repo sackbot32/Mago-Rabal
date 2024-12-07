@@ -5,7 +5,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
         QualitySettings.vSyncCount = 0;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.None;

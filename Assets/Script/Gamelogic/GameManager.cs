@@ -23,8 +23,11 @@ public class GameManager : MonoBehaviour
     public GameObject loseScreen;
     public AudioManager audioMan;
     private Coroutine corouSpin;
+    [SerializeField]
+    private Texture handTexture;
     void Awake()
     {
+        
         audioMan = GetComponent<AudioManager>();
         if (instance == null)
         {

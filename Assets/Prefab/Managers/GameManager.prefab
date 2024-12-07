@@ -2292,6 +2292,7 @@ MonoBehaviour:
   wizardImg: {fileID: 3160277020992546969}
   loseScreen: {fileID: 2588640551024978546}
   audioMan: {fileID: 0}
+  handTexture: {fileID: 8400000, guid: 3413176cf13d54f439a88678a9695868, type: 2}
 --- !u!114 &5150322657174690288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2325,7 +2326,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
