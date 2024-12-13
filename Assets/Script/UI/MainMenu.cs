@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     }
     public void Play()
     {
+
         GameManager.DestroySelfAndGoToScene(1);
     }
 

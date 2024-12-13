@@ -2241,6 +2241,9 @@ MonoBehaviour:
     gameObject: {fileID: 100000, guid: 47636b78c0c5b7d47ab3e627dfe4311c, type: 3}
   - name: BlessSpellExplosionParticle
     gameObject: {fileID: 100006, guid: 85ec79291501b37448bf2b0e96239e81, type: 3}
+  - name: TeleportMark
+    gameObject: {fileID: 3559661175163548536, guid: f41876e5629c8e04ba84854d68b85470,
+      type: 3}
 --- !u!114 &7397799251842071700
 MonoBehaviour:
   m_ObjectHideFlags: 0

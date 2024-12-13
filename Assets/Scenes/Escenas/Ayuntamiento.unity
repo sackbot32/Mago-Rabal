@@ -3967,6 +3967,11 @@ PrefabInstance:
       propertyPath: message
       value: Pulsa E para salir del Ayuntamiento
       objectReference: {fileID: 0}
+    - target: {fileID: 3607731082575492832, guid: f685aec3b995dd743bd55947d6905d5b,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e2e22bd1496edad429c022c076a6657a, type: 2}
     - target: {fileID: 5067746103244646607, guid: f685aec3b995dd743bd55947d6905d5b,
         type: 3}
       propertyPath: m_Name

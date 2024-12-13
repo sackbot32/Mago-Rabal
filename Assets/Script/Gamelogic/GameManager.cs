@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    public static void DestroySelfAndGoToScene(int sceneIndex)
+    public static void DestroySelfAndGoToScene(int sceneIndex, bool isMenu = true)
     {
         if(GameManager.instance != null)
         {
@@ -140,10 +140,24 @@ public class GameManager : MonoBehaviour
                 GameObject currentManager = GameManager.instance.gameObject;
                 GameManager.instance = null;
                 Destroy(currentManager);
+                if (isMenu)
+                {
+                    print("menu");
+                    Time.timeScale = 1;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
                 SceneManager.LoadScene(sceneIndex);
+
             });
         } else
         {
+            if (isMenu) 
+            {
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
             print("no instance");
             SceneManager.LoadScene(sceneIndex);
         }

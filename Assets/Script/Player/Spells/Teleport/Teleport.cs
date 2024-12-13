@@ -6,6 +6,7 @@ public class Teleport : SpellBase
 {
 
     private string targetGameObjectKey = "TeleportTarget";
+    private string markGameObjectKey = "TeleportMark";
     private string teleportParticleGameObjectKey = "TeleportParticle";
     public void ApplyToProyectile(GameObject proyectile, List<SpellAtribute> atributes)
     {
@@ -60,7 +61,14 @@ public class Teleport : SpellBase
 
             Vector3 hitPoint = new Vector3(atributes.Find(x => x.name == "HitPosX").value, atributes.Find(y => y.name == "HitPosY").value, atributes.Find(z => z.name == "HitPosZ").value);
             Debug.Log(hitPoint);
-            newTargetGM = new GameObject();
+            GameObject markGM;
+            if (SpellDictionary.instance.spellGameObjectDict.TryGetValue(markGameObjectKey, out markGM))
+            {
+                newTargetGM = GameObject.Instantiate(markGM,hitPoint,Quaternion.identity);
+            } else
+            {
+                newTargetGM = new GameObject();
+            }
             newTargetGM.transform.position = hitPoint;
         }
         SpellDictionary.instance.spellGameObjectDict[targetGameObjectKey] = newTargetGM;

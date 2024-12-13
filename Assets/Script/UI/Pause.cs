@@ -45,6 +45,10 @@ public class Pause : MonoBehaviour
 
     public void GoToMenu()
     {
+        Time.timeScale = 0;
+        gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         GameManager.DestroySelfAndGoToScene(0);
     }
 }

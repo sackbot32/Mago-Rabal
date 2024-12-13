@@ -188,7 +188,7 @@ public class SpellCaster : MonoBehaviour
             yield return null;
         }
         spellImage.sprite = newImage;
-        while(spellImage.sprite != currentImage)
+        while(spellImage.sprite != currentImage || spellImage.sprite == null)
         {
             spellImage.sprite = currentImage;
         }

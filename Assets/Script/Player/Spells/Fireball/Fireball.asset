@@ -17,16 +17,16 @@ MonoBehaviour:
   spellSprite: {fileID: 21300000, guid: c5a6e6f7e28bbf14c82e2abf4993f1e1, type: 3}
   spellProyectileName: Fire
   proyectileSpeed: 20
-  rate: 0.25
-  isAutomatic: 0
+  rate: 0.1
+  isAutomatic: 1
   tagProyectileDetects:
   - Enemy
   spellType: 2
   atributes:
   - name: Damage
-    value: 20
+    value: 10
   - name: ExplosionDamage
-    value: 5
+    value: 10
   - name: TimeBetween
     value: 0.1
   - name: HitPosX
@@ -40,4 +40,4 @@ MonoBehaviour:
     type: 3}
   castSound: {fileID: 8300000, guid: fb69713ce09ed574f838e4d14594f15d, type: 3}
   detSound: {fileID: 8300000, guid: c087edacdcb92a9468667d0387aa2c81, type: 3}
-  timeSinceLastCast: 1.338074
+  timeSinceLastCast: 6.033585
